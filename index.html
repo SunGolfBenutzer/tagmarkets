@@ -19,84 +19,102 @@
 }
 body { font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.5; min-height: 100vh; }
 .app { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem; }
-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 2rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border); }
+header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 2rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border); flex-wrap: wrap; gap: 12px; }
 header h1 { font-size: 22px; font-weight: 600; letter-spacing: -0.3px; }
 header p { font-size: 13px; color: var(--text2); margin-top: 3px; }
-.fee-area { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-.fee-badge { background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; padding: 5px 14px; font-size: 12px; color: var(--text2); }
-.fee-badge span { color: var(--text); font-weight: 600; }
-.threshold-badge { background: var(--warn-bg); border: 1px solid rgba(160,92,0,0.2); border-radius: 20px; padding: 5px 14px; font-size: 12px; color: var(--warn); }
+.settings { display: flex; gap: 8px; flex-wrap: wrap; }
+.setting-pill { background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; padding: 5px 14px; font-size: 12px; color: var(--text2); white-space: nowrap; }
+.setting-pill strong { color: var(--text); }
+.setting-pill a { color: var(--blue); font-size: 11px; margin-left: 6px; text-decoration: none; }
 .nav { display: flex; gap: 4px; margin-bottom: 1.75rem; background: var(--surface2); border-radius: var(--radius); padding: 4px; width: fit-content; flex-wrap: wrap; }
-.nav button { padding: 7px 18px; border: none; border-radius: var(--radius-sm); background: transparent; color: var(--text2); font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.15s; }
+.nav button { padding: 7px 16px; border: none; border-radius: var(--radius-sm); background: transparent; color: var(--text2); font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.15s; }
 .nav button.active { background: var(--surface); color: var(--text); box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
 .section { display: none; } .section.active { display: block; }
 .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 1.5rem; }
 .metric { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; }
 .metric-label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
 .metric-value { font-size: 22px; font-weight: 600; color: var(--text); }
-.metric-value.green { color: var(--green); } .metric-value.red { color: var(--red); }
+.metric-value.green { color: var(--green); } .metric-value.red { color: var(--red); } .metric-value.warn { color: var(--warn); }
 .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 1.5rem; }
 .card-header { padding: 14px 18px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
 .card-header h2 { font-size: 14px; font-weight: 600; }
 table { width: 100%; border-collapse: collapse; font-size: 13px; }
 th { text-align: left; padding: 9px 14px; font-size: 11px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 0.05em; background: var(--surface2); border-bottom: 1px solid var(--border); }
-td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
 tr:last-child td { border-bottom: none; }
-tr:hover td { background: var(--bg); }
 .badge { display: inline-block; padding: 2px 9px; border-radius: 20px; font-size: 11px; font-weight: 600; }
 .badge-sonic { background: #e8eef8; color: #1a4fa0; }
 .badge-neo { background: #e6f5ed; color: #1a7a4a; }
 .badge-ok { background: var(--green-bg); color: var(--green); }
 .badge-warn { background: var(--warn-bg); color: var(--warn); }
 .badge-err { background: var(--red-bg); color: var(--red); }
-.badge-dep { background: var(--green-bg); color: var(--green); }
-.badge-with { background: var(--red-bg); color: var(--red); }
-.badge-capital { background: #f0e8f8; color: #6a1fa0; }
 .pnl-pos { color: var(--green); font-weight: 600; }
 .pnl-neg { color: var(--red); font-weight: 600; }
+
+/* Ampel Cards */
+.ampel-grid { display: flex; flex-direction: column; gap: 10px; margin-bottom: 1.5rem; }
+.ampel-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 18px; display: grid; grid-template-columns: 40px 1fr auto; gap: 12px; align-items: start; }
+.ampel-card.ok { border-left: 4px solid var(--green); }
+.ampel-card.warn { border-left: 4px solid #e0a020; }
+.ampel-card.err { border-left: 4px solid var(--red); }
+.ampel-icon { font-size: 24px; text-align: center; margin-top: 2px; }
+.ampel-date { font-size: 12px; color: var(--text3); margin-bottom: 4px; }
+.ampel-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+.ampel-detail { font-size: 12px; color: var(--text2); line-height: 1.6; }
+.ampel-detail .highlight { color: var(--red); font-weight: 600; }
+.ampel-detail .ok-text { color: var(--green); font-weight: 600; }
+.ampel-action { font-size: 12px; background: var(--warn-bg); color: var(--warn); border-radius: var(--radius-sm); padding: 6px 10px; margin-top: 8px; display: inline-block; }
+.ampel-nums { text-align: right; white-space: nowrap; }
+.ampel-nums .big { font-size: 18px; font-weight: 700; }
+.ampel-nums .sub { font-size: 11px; color: var(--text3); }
+
+.summary-box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; }
+.summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap: 1rem; }
+.summary-item { }
+.summary-item .label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+.summary-item .value { font-size: 22px; font-weight: 700; }
+.summary-item .sub { font-size: 12px; color: var(--text2); margin-top: 2px; }
+
+.result-banner { border-radius: var(--radius); padding: 1.25rem 1.5rem; display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+.result-banner.ok { background: var(--green-bg); border: 2px solid var(--green); }
+.result-banner.warn { background: var(--warn-bg); border: 2px solid #e0a020; }
+.result-banner.err { background: var(--red-bg); border: 2px solid var(--red); }
+.result-banner .icon { font-size: 36px; }
+.result-banner h3 { font-size: 17px; font-weight: 700; }
+.result-banner p { font-size: 13px; margin-top: 4px; color: var(--text2); }
+
+.info-box { background: var(--blue-bg); border: 1px solid rgba(26,79,160,0.2); border-radius: var(--radius); padding: 1rem 1.25rem; margin-bottom: 1.5rem; font-size: 13px; color: var(--blue); }
+.warn-box { background: var(--warn-bg); border: 1px solid rgba(160,92,0,0.2); border-radius: var(--radius); padding: 1rem 1.25rem; margin-bottom: 1.5rem; font-size: 13px; color: var(--warn); }
+
+/* Import */
 .import-box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.5rem; }
 .import-box h2 { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
 .import-box p { font-size: 13px; color: var(--text2); margin-bottom: 1rem; }
 .import-tabs { display: flex; gap: 6px; margin-bottom: 1rem; flex-wrap: wrap; }
 .import-tab { padding: 5px 14px; border: 1px solid var(--border); border-radius: 20px; font-size: 12px; font-weight: 500; cursor: pointer; background: transparent; color: var(--text2); transition: all 0.15s; }
 .import-tab.active { background: var(--text); color: #fff; border-color: var(--text); }
-textarea { width: 100%; height: 140px; border: 1px solid var(--border2); border-radius: var(--radius-sm); padding: 10px 12px; font-family: 'Menlo', 'Monaco', monospace; font-size: 12px; resize: vertical; background: var(--bg); color: var(--text); outline: none; transition: border 0.15s; }
+textarea { width: 100%; height: 130px; border: 1px solid var(--border2); border-radius: var(--radius-sm); padding: 10px 12px; font-family: 'Menlo', monospace; font-size: 12px; resize: vertical; background: var(--bg); color: var(--text); outline: none; }
 textarea:focus { border-color: var(--blue); }
 .import-actions { display: flex; gap: 8px; margin-top: 10px; align-items: center; flex-wrap: wrap; }
 .btn { padding: 8px 18px; border-radius: var(--radius-sm); font-size: 13px; font-weight: 500; cursor: pointer; border: 1px solid var(--border2); background: var(--surface); color: var(--text); transition: all 0.15s; }
 .btn:hover { background: var(--surface2); }
 .btn-primary { background: var(--text); color: #fff; border-color: var(--text); }
-.btn-primary:hover { background: #333; }
-.btn-danger { color: var(--red); border-color: rgba(192,57,43,0.3); }
-.btn-danger:hover { background: var(--red-bg); }
 .btn-sm { padding: 5px 12px; font-size: 12px; }
+.btn-danger { color: var(--red); border-color: rgba(192,57,43,0.3); }
 .status-msg { font-size: 12px; padding: 6px 12px; border-radius: var(--radius-sm); display: none; }
 .status-msg.ok { background: var(--green-bg); color: var(--green); display: inline-block; }
 .status-msg.err { background: var(--red-bg); color: var(--red); display: inline-block; }
-.check-summary { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
-@media(max-width:600px){ .check-summary { grid-template-columns: 1fr; } }
-.check-box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.5rem; }
-.check-box h3 { font-size: 12px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; }
-.check-row { display: flex; justify-content: space-between; font-size: 13px; padding: 5px 0; border-bottom: 1px solid var(--border); }
-.check-row:last-child { border-bottom: none; font-weight: 600; }
-.check-row.capital { color: var(--text3); font-style: italic; }
-.result-box { background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.5rem; display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
-.result-icon { font-size: 32px; }
-.result-text h3 { font-size: 16px; font-weight: 600; }
-.result-text p { font-size: 13px; color: var(--text2); margin-top: 3px; }
-.result-box.ok { border-color: var(--green); background: var(--green-bg); }
-.result-box.warn { border-color: #e0a020; background: var(--warn-bg); }
-.result-box.err { border-color: var(--red); background: var(--red-bg); }
-.empty { text-align: center; padding: 3rem 1rem; color: var(--text3); font-size: 14px; }
 .instructions { background: var(--blue-bg); border: 1px solid rgba(26,79,160,0.2); border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; }
 .instructions h3 { font-size: 13px; font-weight: 600; color: var(--blue); margin-bottom: 8px; }
 .instructions ol { padding-left: 1.2rem; }
-.instructions li { font-size: 13px; color: var(--text2); margin-bottom: 4px; line-height: 1.6; }
-.info-box { background: var(--warn-bg); border: 1px solid rgba(160,92,0,0.2); border-radius: var(--radius); padding: 1rem 1.25rem; margin-bottom: 1.5rem; font-size: 13px; color: var(--warn); }
-.info-box strong { font-weight: 600; }
-.delete-btn { background: none; border: none; cursor: pointer; color: var(--text3); font-size: 16px; padding: 2px 4px; border-radius: 4px; transition: color 0.15s; }
-.delete-btn:hover { color: var(--red); }
-.detail-toggle { font-size: 11px; color: var(--blue); cursor: pointer; text-decoration: underline; white-space: nowrap; }
+.instructions li { font-size: 13px; color: var(--text2); margin-bottom: 4px; }
+.del-btn { background: none; border: none; cursor: pointer; color: var(--text3); font-size: 15px; padding: 2px 4px; }
+.del-btn:hover { color: var(--red); }
+.empty { text-align: center; padding: 3rem 1rem; color: var(--text3); }
+
+.filter-bar { display: flex; gap: 8px; margin-bottom: 1rem; flex-wrap: wrap; }
+.filter-btn { padding: 4px 12px; border: 1px solid var(--border); border-radius: 20px; font-size: 12px; cursor: pointer; background: transparent; color: var(--text2); transition: all 0.15s; }
+.filter-btn.active { background: var(--text); color: #fff; border-color: var(--text); }
 </style>
 </head>
 <body>
@@ -104,44 +122,42 @@ textarea:focus { border-color: var(--blue); }
   <header>
     <div>
       <h1>Tag Markets – Kontrollcenter</h1>
-      <p>Copy Trading Überwachung & Prüfung</p>
+      <p>Copy Trading Ertrags-Prüfung &amp; Ampelsystem</p>
     </div>
-    <div class="fee-area">
-      <div class="fee-badge">Gebührsatz: <span id="feeDisplay">30%</span> <a href="#" onclick="changeFee()" style="color:var(--blue);font-size:11px;margin-left:6px;text-decoration:none;">ändern</a></div>
-      <div class="threshold-badge">Kapitalgrenze: <strong id="thresholdDisplay">$50</strong> <a href="#" onclick="changeThreshold()" style="color:var(--warn);font-size:11px;margin-left:6px;text-decoration:none;">ändern</a></div>
+    <div class="settings">
+      <div class="setting-pill">Gebühr: <strong id="feeDisplay">30%</strong><a href="#" onclick="changeFee()">ändern</a></div>
+      <div class="setting-pill">Kapitalgrenze: <strong id="thresholdDisplay">$50</strong><a href="#" onclick="changeThreshold()">ändern</a></div>
+      <div class="setting-pill">Toleranz: <strong id="tolDisplay">$0.50</strong><a href="#" onclick="changeTol()">ändern</a></div>
     </div>
   </header>
 
   <nav class="nav">
-    <button class="active" onclick="switchTab('import',this)">📥 Daten einpflegen</button>
+    <button class="active" onclick="switchTab('import',this)">📥 Einpflegen</button>
+    <button onclick="switchTab('pruefung',this)">🚦 Prüfung & Ampel</button>
     <button onclick="switchTab('trades',this)">📊 Trades</button>
     <button onclick="switchTab('wallet',this)">💼 Wallet</button>
-    <button onclick="switchTab('pruefung',this)">✅ Prüfung</button>
     <button onclick="switchTab('strategien',this)">📈 Strategien</button>
   </nav>
 
   <!-- IMPORT -->
   <div id="sec-import" class="section active">
     <div class="instructions">
-      <h3>📋 So funktioniert es</h3>
+      <h3>📋 Workflow</h3>
       <ol>
-        <li>Screenshot hier in den <strong>Claude Chat</strong> hochladen</li>
-        <li>Claude liest die Daten aus und gibt dir einen <strong>JSON-Block</strong></li>
-        <li>Typ auswählen → JSON einfügen → <strong>Importieren</strong></li>
+        <li>Screenshot in Claude Chat hochladen → Claude liest Zahlen aus</li>
+        <li>Typ wählen → JSON einfügen → Importieren</li>
+        <li>Tab <strong>"Prüfung &amp; Ampel"</strong> öffnen für die Auswertung</li>
       </ol>
-    </div>
-    <div class="info-box">
-      <strong>⚙️ Kapitalgrenze:</strong> Wallet-Transaktionen über <strong id="thresholdInfo">$50</strong> werden als Kapitalumschichtung gewertet und aus der Trade-Prüfung herausgerechnet. Diese Grenze kannst du oben rechts anpassen.
     </div>
     <div class="import-box">
       <h2>Daten einfügen</h2>
-      <p>Typ wählen, JSON-Block einfügen, Importieren klicken.</p>
+      <p>Typ wählen, JSON von Claude einfügen, Importieren klicken.</p>
       <div class="import-tabs">
-        <button class="import-tab active" id="itab-trades" onclick="setImportType('trades')">📊 Trades</button>
-        <button class="import-tab" id="itab-wallet" onclick="setImportType('wallet')">💼 Wallet</button>
-        <button class="import-tab" id="itab-strategien" onclick="setImportType('strategien')">📈 Strategien</button>
+        <button class="import-tab active" id="itab-trades" onclick="setIT('trades')">📊 Trades</button>
+        <button class="import-tab" id="itab-wallet" onclick="setIT('wallet')">💼 Wallet</button>
+        <button class="import-tab" id="itab-strategien" onclick="setIT('strategien')">📈 Strategien</button>
       </div>
-      <textarea id="importText" placeholder='Hier den JSON von Claude einfügen...'></textarea>
+      <textarea id="importText" placeholder="Hier den JSON von Claude einfügen..."></textarea>
       <div class="import-actions">
         <button class="btn btn-primary" onclick="importData()">Importieren</button>
         <button class="btn" onclick="document.getElementById('importText').value=''">Leeren</button>
@@ -150,35 +166,15 @@ textarea:focus { border-color: var(--blue); }
     </div>
     <div class="card">
       <div class="card-header"><h2>Datenstand</h2></div>
-      <div style="padding:1rem 1.5rem; display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:1rem;">
-        <div><div style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;">Trades</div><div style="font-size:28px;font-weight:600;" id="countTrades">0</div></div>
-        <div><div style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;">Wallet-Transaktionen</div><div style="font-size:28px;font-weight:600;" id="countWallet">0</div></div>
-        <div><div style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;">davon Trade-relevant</div><div style="font-size:28px;font-weight:600;" id="countWalletFiltered">0</div></div>
-        <div><div style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;">Strategien</div><div style="font-size:28px;font-weight:600;" id="countStrat">0</div></div>
+      <div style="padding:1rem 1.5rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1rem;">
+        <div><div style="font-size:11px;color:var(--text3);text-transform:uppercase;margin-bottom:4px;">Trades</div><div style="font-size:26px;font-weight:700;" id="cntTrades">0</div></div>
+        <div><div style="font-size:11px;color:var(--text3);text-transform:uppercase;margin-bottom:4px;">Handelstage</div><div style="font-size:26px;font-weight:700;" id="cntDays">0</div></div>
+        <div><div style="font-size:11px;color:var(--text3);text-transform:uppercase;margin-bottom:4px;">Wallet-Transaktionen</div><div style="font-size:26px;font-weight:700;" id="cntWallet">0</div></div>
+        <div><div style="font-size:11px;color:var(--text3);text-transform:uppercase;margin-bottom:4px;">Prop Withdrawals</div><div style="font-size:26px;font-weight:700;" id="cntWith">0</div></div>
+        <div><div style="font-size:11px;color:var(--text3);text-transform:uppercase;margin-bottom:4px;">Strategien</div><div style="font-size:26px;font-weight:700;" id="cntStrat">0</div></div>
       </div>
     </div>
-    <div style="margin-top:1rem;">
-      <button class="btn btn-danger btn-sm" onclick="clearAll()">⚠ Alle Daten löschen</button>
-    </div>
-  </div>
-
-  <!-- TRADES -->
-  <div id="sec-trades" class="section">
-    <div class="metrics" id="tradesMetrics"></div>
-    <div class="card">
-      <div class="card-header"><h2>Alle Trades</h2><button class="btn btn-sm btn-danger" onclick="clearSection('trades')">Löschen</button></div>
-      <div id="tradesTable"></div>
-    </div>
-  </div>
-
-  <!-- WALLET -->
-  <div id="sec-wallet" class="section">
-    <div class="metrics" id="walletMetrics"></div>
-    <div id="walletCapitalInfo"></div>
-    <div class="card">
-      <div class="card-header"><h2>Alle Transaktionen</h2><button class="btn btn-sm btn-danger" onclick="clearSection('wallet')">Löschen</button></div>
-      <div id="walletTable"></div>
-    </div>
+    <button class="btn btn-danger btn-sm" onclick="clearAll()">⚠ Alle Daten löschen</button>
   </div>
 
   <!-- PRÜFUNG -->
@@ -186,275 +182,367 @@ textarea:focus { border-color: var(--blue); }
     <div id="pruefungContent"></div>
   </div>
 
+  <!-- TRADES -->
+  <div id="sec-trades" class="section">
+    <div class="metrics" id="tradesMet"></div>
+    <div class="card">
+      <div class="card-header"><h2>Alle Trades</h2><button class="btn btn-sm btn-danger" onclick="clearSec('trades')">Löschen</button></div>
+      <div id="tradesTable"></div>
+    </div>
+  </div>
+
+  <!-- WALLET -->
+  <div id="sec-wallet" class="section">
+    <div class="metrics" id="walletMet"></div>
+    <div class="card">
+      <div class="card-header"><h2>Alle Transaktionen</h2><button class="btn btn-sm btn-danger" onclick="clearSec('wallet')">Löschen</button></div>
+      <div id="walletTable"></div>
+    </div>
+  </div>
+
   <!-- STRATEGIEN -->
   <div id="sec-strategien" class="section">
-    <div class="metrics" id="stratMetrics"></div>
+    <div class="metrics" id="stratMet"></div>
     <div class="card">
-      <div class="card-header"><h2>Aktive Strategien</h2><button class="btn btn-sm btn-danger" onclick="clearSection('strategien')">Löschen</button></div>
+      <div class="card-header"><h2>Aktive Strategien</h2><button class="btn btn-sm btn-danger" onclick="clearSec('strategien')">Löschen</button></div>
       <div id="stratTable"></div>
     </div>
   </div>
 </div>
 
 <script>
-const KEYS = { trades:'tm_trades', wallet:'tm_wallet', strategien:'tm_strategien', fee:'tm_fee', threshold:'tm_threshold' };
+const KEYS = { trades:'tm_trades', wallet:'tm_wallet', strategien:'tm_strat', fee:'tm_fee', threshold:'tm_threshold', tol:'tm_tol' };
 let importType = 'trades';
-let feeRate = parseFloat(localStorage.getItem(KEYS.fee) || '0.30');
-let capitalThreshold = parseFloat(localStorage.getItem(KEYS.threshold) || '50');
+let feeRate = parseFloat(localStorage.getItem(KEYS.fee)||'0.30');
+let capitalThreshold = parseFloat(localStorage.getItem(KEYS.threshold)||'50');
+let tolerance = parseFloat(localStorage.getItem(KEYS.tol)||'0.50');
 
-function updateDisplays() {
+function updDisp() {
   document.getElementById('feeDisplay').textContent = (feeRate*100).toFixed(0)+'%';
   document.getElementById('thresholdDisplay').textContent = '$'+capitalThreshold.toFixed(0);
-  document.getElementById('thresholdInfo').textContent = '$'+capitalThreshold.toFixed(0);
+  document.getElementById('tolDisplay').textContent = '$'+tolerance.toFixed(2);
 }
-updateDisplays();
+updDisp();
 
-function load(k) { try { return JSON.parse(localStorage.getItem(KEYS[k]) || '[]'); } catch(e) { return []; } }
-function save(k, d) { localStorage.setItem(KEYS[k], JSON.stringify(d)); updateCounts(); }
+function changeFee() { const v=prompt('Gebührensatz in %:',+(feeRate*100).toFixed(0)); if(v&&!isNaN(v)){feeRate=+v/100;localStorage.setItem(KEYS.fee,feeRate);updDisp();} }
+function changeThreshold() { const v=prompt('Kapitalgrenze in USD\n(Transaktionen über diesem Betrag = Kapitalumschichtung):',capitalThreshold); if(v&&!isNaN(v)){capitalThreshold=+v;localStorage.setItem(KEYS.threshold,capitalThreshold);updDisp();updateCounts();} }
+function changeTol() { const v=prompt('Toleranz in USD\n(Abweichungen kleiner als dieser Betrag gelten als OK):',tolerance); if(v&&!isNaN(v)){tolerance=+v;localStorage.setItem(KEYS.tol,tolerance);updDisp();} }
 
-// Filter: only Prop Deposits/Withdrawals under the capital threshold
-function isTradeRelevant(tx) {
-  const isPropType = (tx.type||'').startsWith('Prop');
-  const underThreshold = parseFloat(tx.netAmount||0) < capitalThreshold;
-  return isPropType && underThreshold;
-}
+function load(k) { try{return JSON.parse(localStorage.getItem(KEYS[k])||'[]');}catch(e){return[];} }
+function save(k,d) { localStorage.setItem(KEYS[k],JSON.stringify(d)); updateCounts(); }
+
+function isPropWithdrawal(tx) { return (tx.type||'').includes('Withdrawal') && (tx.type||'').startsWith('Prop') && parseFloat(tx.netAmount||0) < capitalThreshold; }
+function isPropDeposit(tx) { return (tx.type||'').includes('Deposit') && (tx.type||'').startsWith('Prop') && parseFloat(tx.netAmount||0) < capitalThreshold; }
+function isCapital(tx) { return parseFloat(tx.netAmount||0) >= capitalThreshold || !(tx.type||'').startsWith('Prop'); }
 
 function updateCounts() {
-  const wallet = load('wallet');
-  document.getElementById('countTrades').textContent = load('trades').length;
-  document.getElementById('countWallet').textContent = wallet.length;
-  document.getElementById('countWalletFiltered').textContent = wallet.filter(isTradeRelevant).length;
-  document.getElementById('countStrat').textContent = load('strategien').length;
+  const t=load('trades'), w=load('wallet'), s=load('strategien');
+  const days = [...new Set(t.map(x=>x.date))].length;
+  const withs = w.filter(isPropWithdrawal);
+  document.getElementById('cntTrades').textContent = t.length;
+  document.getElementById('cntDays').textContent = days;
+  document.getElementById('cntWallet').textContent = w.length;
+  document.getElementById('cntWith').textContent = withs.length;
+  document.getElementById('cntStrat').textContent = s.length;
 }
 updateCounts();
 
-function changeFee() {
-  const v = prompt('Gebührensatz in % eingeben:', (feeRate*100).toFixed(0));
-  if (v && !isNaN(v)) { feeRate = parseFloat(v)/100; localStorage.setItem(KEYS.fee, feeRate); updateDisplays(); }
-}
-function changeThreshold() {
-  const v = prompt('Kapitalgrenze in USD eingeben.\nTransaktionen ÜBER diesem Betrag werden als Kapitalumschichtung gewertet und aus der Trade-Prüfung herausgerechnet:', capitalThreshold.toFixed(0));
-  if (v && !isNaN(v)) { capitalThreshold = parseFloat(v); localStorage.setItem(KEYS.threshold, capitalThreshold); updateDisplays(); updateCounts(); }
-}
-
-function switchTab(t, btn) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+function switchTab(t,btn) {
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
   document.getElementById('sec-'+t).classList.add('active');
   if(btn) btn.classList.add('active');
-  const renders = { trades:renderTrades, wallet:renderWallet, pruefung:renderPruefung, strategien:renderStrategien };
-  if(renders[t]) renders[t]();
+  ({trades:renderTrades,wallet:renderWallet,pruefung:renderPruefung,strategien:renderStrategien})[t]?.();
 }
 
-function setImportType(t) {
-  importType = t;
-  document.querySelectorAll('.import-tab').forEach(b => b.classList.remove('active'));
+function setIT(t) {
+  importType=t;
+  document.querySelectorAll('.import-tab').forEach(b=>b.classList.remove('active'));
   document.getElementById('itab-'+t).classList.add('active');
 }
 
-function setStatus(msg, type) {
-  const el = document.getElementById('importStatus');
-  el.className = 'status-msg '+type; el.textContent = msg;
-  setTimeout(() => { el.className = 'status-msg'; el.textContent = ''; }, 4000);
+function setStatus(msg,type) {
+  const el=document.getElementById('importStatus');
+  el.className='status-msg '+type; el.textContent=msg;
+  setTimeout(()=>{el.className='status-msg';el.textContent='';},4000);
 }
 
 function importData() {
-  const raw = document.getElementById('importText').value.trim();
-  if (!raw) { setStatus('Kein Inhalt', 'err'); return; }
+  const raw=document.getElementById('importText').value.trim();
+  if(!raw){setStatus('Kein Inhalt','err');return;}
   let parsed;
-  try { let clean = raw.replace(/```json|```/g,'').trim(); parsed = JSON.parse(clean); if(!Array.isArray(parsed)) throw new Error('Kein Array'); }
-  catch(e) { setStatus('Ungültiges JSON: '+e.message, 'err'); return; }
-  const existing = load(importType);
-  let merged, added = 0;
-  if (importType === 'trades') {
-    const ids = new Set(existing.map(t => t.date+'_'+t.strategy+'_'+t.entryTime+'_'+t.size+'_'+t.pnl));
-    const deduped = parsed.filter(t => !ids.has(t.date+'_'+t.strategy+'_'+t.entryTime+'_'+t.size+'_'+t.pnl));
-    added = deduped.length; merged = [...existing, ...deduped];
-  } else if (importType === 'wallet') {
-    const ids = new Set(existing.map(t => t.id));
-    const deduped = parsed.filter(t => !ids.has(t.id));
-    added = deduped.length; merged = [...existing, ...deduped];
-  } else { merged = parsed; added = parsed.length; }
-  save(importType, merged);
-  document.getElementById('importText').value = '';
-  setStatus('✓ '+added+' Einträge importiert', 'ok');
+  try{let c=raw.replace(/```json|```/g,'').trim();parsed=JSON.parse(c);if(!Array.isArray(parsed))throw new Error('Kein Array');}
+  catch(e){setStatus('Ungültiges JSON: '+e.message,'err');return;}
+  const existing=load(importType);
+  let merged,added=0;
+  if(importType==='trades'){
+    const ids=new Set(existing.map(t=>t.date+'_'+t.strategy+'_'+t.entryTime+'_'+t.size+'_'+t.pnl));
+    const ded=parsed.filter(t=>!ids.has(t.date+'_'+t.strategy+'_'+t.entryTime+'_'+t.size+'_'+t.pnl));
+    added=ded.length; merged=[...existing,...ded];
+  } else if(importType==='wallet'){
+    const ids=new Set(existing.map(t=>t.id));
+    const ded=parsed.filter(t=>!ids.has(t.id));
+    added=ded.length; merged=[...existing,...ded];
+  } else { merged=parsed; added=parsed.length; }
+  save(importType,merged);
+  document.getElementById('importText').value='';
+  setStatus('✓ '+added+' Einträge importiert','ok');
 }
 
-function clearSection(k) { if(confirm('Alle '+k+'-Daten löschen?')) { save(k, []); switchTab(k); } }
-function clearAll() { if(confirm('ALLE Daten unwiderruflich löschen?')) { ['trades','wallet','strategien'].forEach(k => save(k, [])); updateCounts(); } }
+function clearSec(k) { if(confirm('Alle '+k+'-Daten löschen?')){save(k,[]);switchTab(k);} }
+function clearAll() { if(confirm('ALLE Daten löschen?')){['trades','wallet','strategien'].forEach(k=>save(k,[]));updateCounts();} }
 
-function fmt(n) { return '$'+parseFloat(n).toFixed(2); }
-function fmtPos(n) { return (n>=0?'+':'')+fmt(n); }
+const fmt = n => '$'+parseFloat(n).toFixed(2);
+const fmtS = n => (n>=0?'+':'')+fmt(n);
 
+// ─── KERN-PRÜFLOGIK ───────────────────────────────────────────────
+function renderPruefung() {
+  const trades = load('trades');
+  const wallet = load('wallet');
+  const cont = document.getElementById('pruefungContent');
+
+  if(!trades.length || !wallet.length) {
+    cont.innerHTML='<div class="empty">Für die Prüfung werden Trades UND Wallet-Daten benötigt.</div>'; return;
+  }
+
+  // Alle Handelstage (aus Trades)
+  const tradeDates = [...new Set(trades.map(t=>t.date))].sort().reverse();
+
+  // Prop Withdrawals nach Datum
+  const propWithdrawals = wallet.filter(isPropWithdrawal);
+  const withdrawalsByDate = {};
+  propWithdrawals.forEach(w => {
+    if(!withdrawalsByDate[w.date]) withdrawalsByDate[w.date] = [];
+    withdrawalsByDate[w.date].push(w);
+  });
+
+  // Kapitalumschichtungen
+  const capitalEntries = wallet.filter(isCapital);
+
+  // Gesamt-Kennzahlen
+  let totalBrutto=0, totalNetto=0, totalWithdrawn=0, daysOk=0, daysWarn=0, daysErr=0, totalMissing=0;
+  const dayResults = [];
+
+  tradeDates.forEach(date => {
+    const dayTrades = trades.filter(t=>t.date===date);
+    const brutto = dayTrades.reduce((s,t)=>s+parseFloat(t.pnl||0),0);
+    const netto = brutto*(1-feeRate);
+    const dayWith = withdrawalsByDate[date] || [];
+    const withdrawn = dayWith.reduce((s,w)=>s+parseFloat(w.netAmount||0),0);
+    const diff = netto - withdrawn; // positive = zu wenig ausgezahlt; negative = zu viel
+    const absDiff = Math.abs(diff);
+    const pct = netto!==0 ? (absDiff/Math.abs(netto)*100).toFixed(1) : '0';
+
+    let status, icon, title, detail, action;
+
+    if(netto <= 0) {
+      // Verlusttag oder Null
+      status = 'ok'; icon = '⚪'; title = 'Verlusttag / kein Ertrag';
+      detail = `Brutto-PNL: ${fmt(brutto)} → Kein Withdrawal erwartet.`;
+      action = null;
+    } else if(absDiff <= tolerance) {
+      status = 'ok'; icon = '✅'; title = 'Vollständig ausgezahlt';
+      detail = `Netto erwartet: <span class="ok-text">${fmt(netto)}</span> — Ausgezahlt: <span class="ok-text">${fmt(withdrawn)}</span> — Abweichung: ${fmt(absDiff)} (innerhalb Toleranz)`;
+      action = null;
+      daysOk++;
+    } else if(diff > tolerance) {
+      // Zu wenig ausgezahlt
+      const missing = diff;
+      status = dayWith.length===0 ? 'err' : 'warn';
+      icon = dayWith.length===0 ? '❌' : '⚠️';
+      if(dayWith.length===0) {
+        title = 'Kein Withdrawal vorhanden – Ertrag nicht ausgezahlt!';
+        detail = `Netto erwartet: <span class="highlight">${fmt(netto)}</span> — Kein Withdrawal gefunden. Möglicherweise technischer Fehler oder Auszahlung steht noch aus.`;
+        action = `➡ Auf Tag Markets prüfen ob Withdrawal von ${fmt(netto)} für ${date} ausstehend ist. Bei Problemen: Support kontaktieren.`;
+        daysErr++;
+      } else {
+        title = 'Teilweise ausgezahlt – Differenz offen';
+        detail = `Netto erwartet: <span class="highlight">${fmt(netto)}</span> — Ausgezahlt: ${fmt(withdrawn)} — <span class="highlight">Fehlend: ${fmt(missing)} (${pct}%)</span>`;
+        action = `➡ ${fmt(missing)} wurden nicht ausgezahlt. Auf Tag Markets prüfen ob ein ausstehender Withdrawal von ca. ${fmt(missing)} für ${date} existiert.`;
+        daysWarn++;
+      }
+      totalMissing += missing;
+    } else {
+      // Zu viel ausgezahlt (unwahrscheinlich, aber möglich)
+      status = 'warn'; icon = '⚠️';
+      title = 'Mehr ausgezahlt als erwartet';
+      detail = `Netto erwartet: ${fmt(netto)} — Ausgezahlt: <span class="highlight">${fmt(withdrawn)}</span> — Überschuss: ${fmt(-diff)} (${pct}%)`;
+      action = `➡ Es wurden ${fmt(-diff)} mehr ausgezahlt als erwartet. Möglicherweise Rundungsdifferenz oder Korrektur durch Tag Markets.`;
+      daysWarn++;
+    }
+
+    totalBrutto += brutto;
+    totalNetto += netto;
+    totalWithdrawn += withdrawn;
+
+    dayResults.push({date, brutto, netto, withdrawn, diff, status, icon, title, detail, action, dayTrades, dayWith});
+  });
+
+  const totalMissingAbs = Math.abs(totalNetto - totalWithdrawn);
+  const overallStatus = daysErr > 0 ? 'err' : daysWarn > 0 ? 'warn' : 'ok';
+  const overallIcons = {ok:'✅', warn:'⚠️', err:'❌'};
+  const overallLabels = {
+    ok: 'Alle Erträge vollständig ausgezahlt',
+    warn: `${daysWarn} Tag${daysWarn!==1?'e':''} mit Abweichung – bitte prüfen`,
+    err: `${daysErr} Tag${daysErr!==1?'e':''} ohne Auszahlung – Handlungsbedarf!`
+  };
+
+  // Filter state
+  let activeFilter = 'all';
+
+  const renderCards = (filter) => {
+    activeFilter = filter;
+    const filtered = filter==='all' ? dayResults : dayResults.filter(r=>r.status===filter || (filter==='issue' && r.status!=='ok'));
+    if(!filtered.length) return '<div class="empty">Keine Einträge für diesen Filter.</div>';
+    return filtered.map(r => `
+      <div class="ampel-card ${r.status}">
+        <div class="ampel-icon">${r.icon}</div>
+        <div>
+          <div class="ampel-date">${r.date} · ${r.dayTrades.length} Trade${r.dayTrades.length!==1?'s':''}</div>
+          <div class="ampel-title">${r.title}</div>
+          <div class="ampel-detail">${r.detail}</div>
+          ${r.action ? `<div class="ampel-action">${r.action}</div>` : ''}
+          ${r.dayWith.length>0 ? `<div style="font-size:11px;color:var(--text3);margin-top:6px;">Withdrawals am ${r.date}: ${r.dayWith.map(w=>'#'+w.id+' '+fmt(w.netAmount)).join(' · ')}</div>` : ''}
+        </div>
+        <div class="ampel-nums">
+          <div class="big ${r.netto>=0?'pnl-pos':'pnl-neg'}">${fmt(Math.abs(r.netto))}</div>
+          <div class="sub">Netto erwartet</div>
+          <div style="margin-top:6px;font-size:14px;font-weight:600;color:${r.withdrawn>0?'var(--green)':'var(--text3)'};">${fmt(r.withdrawn)}</div>
+          <div class="sub">ausgezahlt</div>
+        </div>
+      </div>`).join('');
+  };
+
+  cont.innerHTML = `
+    <div class="result-banner ${overallStatus}">
+      <div class="icon">${overallIcons[overallStatus]}</div>
+      <div>
+        <h3>${overallLabels[overallStatus]}</h3>
+        <p>${daysOk} Tag${daysOk!==1?'e':''} OK · ${daysWarn} mit Abweichung · ${daysErr} ohne Auszahlung${totalMissingAbs>tolerance?' · Gesamt offen: <strong>'+fmt(totalMissingAbs)+'</strong>':''}</p>
+      </div>
+    </div>
+
+    <div class="summary-box">
+      <div class="summary-grid">
+        <div class="summary-item">
+          <div class="label">Brutto-PNL (alle Trades)</div>
+          <div class="value pnl-pos">${fmt(totalBrutto)}</div>
+          <div class="sub">${trades.length} Trades · ${tradeDates.length} Tage</div>
+        </div>
+        <div class="summary-item">
+          <div class="label">Netto erwartet (nach ${(feeRate*100).toFixed(0)}% Gebühr)</div>
+          <div class="value pnl-pos">${fmt(totalNetto)}</div>
+          <div class="sub">Gebühr gesamt: ${fmt(totalBrutto*feeRate)}</div>
+        </div>
+        <div class="summary-item">
+          <div class="label">Tatsächlich ausgezahlt</div>
+          <div class="value ${Math.abs(totalNetto-totalWithdrawn)<=tolerance?'pnl-pos':'pnl-neg'}">${fmt(totalWithdrawn)}</div>
+          <div class="sub">${propWithdrawals.length} Prop Withdrawals</div>
+        </div>
+        <div class="summary-item">
+          <div class="label">Differenz</div>
+          <div class="value ${totalMissingAbs<=tolerance?'green':totalMissingAbs<=5?'warn':'red'}">${fmt(totalMissingAbs)}</div>
+          <div class="sub">${totalNetto>totalWithdrawn?'Noch nicht ausgezahlt':'Überzahlt'}</div>
+        </div>
+      </div>
+    </div>
+
+    ${capitalEntries.length>0 ? `<div class="warn-box">💰 <strong>${capitalEntries.length} Kapitalumschichtungen herausgefiltert</strong> (≥ ${fmt(capitalThreshold)} oder kein Prop-Typ). Diese fließen nicht in die Prüfung ein.</div>` : ''}
+
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
+      <h2 style="font-size:16px;font-weight:600;">Tagesübersicht</h2>
+      <div class="filter-bar" style="margin-bottom:0;">
+        <button class="filter-btn active" id="fb-all" onclick="filterAmpel('all')">Alle (${dayResults.length})</button>
+        <button class="filter-btn" id="fb-issue" onclick="filterAmpel('issue')">Probleme (${daysWarn+daysErr})</button>
+        <button class="filter-btn" id="fb-err" onclick="filterAmpel('err')">❌ Keine Auszahlung (${daysErr})</button>
+        <button class="filter-btn" id="fb-warn" onclick="filterAmpel('warn')">⚠️ Abweichung (${daysWarn})</button>
+        <button class="filter-btn" id="fb-ok" onclick="filterAmpel('ok')">✅ OK (${daysOk})</button>
+      </div>
+    </div>
+    <div class="ampel-grid" id="ampelCards">${renderCards('all')}</div>`;
+
+  // Filter function (needs to be global for onclick)
+  window.filterAmpel = (f) => {
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    document.getElementById('fb-'+f).classList.add('active');
+    document.getElementById('ampelCards').innerHTML = renderCards(f);
+  };
+}
+
+// ─── TRADES ───────────────────────────────────────────────────────
 function renderTrades() {
-  const trades = load('trades').sort((a,b) => b.date.localeCompare(a.date));
-  const totalBrutto = trades.reduce((s,t) => s+parseFloat(t.pnl||0), 0);
-  const totalNetto = totalBrutto*(1-feeRate);
-  document.getElementById('tradesMetrics').innerHTML = `
+  const trades = load('trades').sort((a,b)=>b.date.localeCompare(a.date));
+  const tb = trades.reduce((s,t)=>s+parseFloat(t.pnl||0),0);
+  document.getElementById('tradesMet').innerHTML = `
     <div class="metric"><div class="metric-label">Trades</div><div class="metric-value">${trades.length}</div></div>
-    <div class="metric"><div class="metric-label">Brutto-PNL</div><div class="metric-value green">+${fmt(totalBrutto)}</div></div>
-    <div class="metric"><div class="metric-label">Gebühr (${(feeRate*100).toFixed(0)}%)</div><div class="metric-value red">-${fmt(totalBrutto*feeRate)}</div></div>
-    <div class="metric"><div class="metric-label">Netto-PNL</div><div class="metric-value green">+${fmt(totalNetto)}</div></div>`;
-  if (!trades.length) { document.getElementById('tradesTable').innerHTML = '<div class="empty">Noch keine Trades importiert.</div>'; return; }
-  const rows = trades.map((t,i) => `<tr>
+    <div class="metric"><div class="metric-label">Brutto-PNL</div><div class="metric-value green">${fmtS(tb)}</div></div>
+    <div class="metric"><div class="metric-label">Gebühr (${(feeRate*100).toFixed(0)}%)</div><div class="metric-value red">-${fmt(tb*feeRate)}</div></div>
+    <div class="metric"><div class="metric-label">Netto-PNL</div><div class="metric-value green">${fmtS(tb*(1-feeRate))}</div></div>`;
+  if(!trades.length){document.getElementById('tradesTable').innerHTML='<div class="empty">Noch keine Trades.</div>';return;}
+  const rows = trades.map((t,i)=>`<tr>
     <td>${t.date}</td>
     <td><span class="badge ${t.strategy==='SONIC'?'badge-sonic':'badge-neo'}">${t.strategy}</span></td>
     <td>${t.instrument||''}</td>
     <td style="color:var(--text2)">${t.size||''}</td>
     <td style="color:var(--text2)">${t.entryTime||''}→${t.exitTime||''}</td>
-    <td class="${parseFloat(t.pnl)>=0?'pnl-pos':'pnl-neg'}">${parseFloat(t.pnl)>=0?'+':''}${fmt(t.pnl)}</td>
-    <td class="${parseFloat(t.pnl)>=0?'pnl-pos':'pnl-neg'}">${parseFloat(t.pnl)*(1-feeRate)>=0?'+':''}${fmt(parseFloat(t.pnl)*(1-feeRate))}</td>
-    <td><button class="delete-btn" onclick="delItem('trades',${i})">✕</button></td>
+    <td class="${parseFloat(t.pnl)>=0?'pnl-pos':'pnl-neg'}">${fmtS(t.pnl)}</td>
+    <td class="${parseFloat(t.pnl)*(1-feeRate)>=0?'pnl-pos':'pnl-neg'}">${fmtS(parseFloat(t.pnl)*(1-feeRate))}</td>
+    <td><button class="del-btn" onclick="delItem('trades',${i})">✕</button></td>
   </tr>`).join('');
-  document.getElementById('tradesTable').innerHTML = `<table><thead><tr><th>Datum</th><th>Strategie</th><th>Instrument</th><th>Size</th><th>Zeit</th><th>Brutto-PNL</th><th>Netto</th><th></th></tr></thead><tbody>${rows}</tbody></table>`;
+  document.getElementById('tradesTable').innerHTML=`<table><thead><tr><th>Datum</th><th>Strategie</th><th>Instrument</th><th>Size</th><th>Zeit</th><th>Brutto</th><th>Netto</th><th></th></tr></thead><tbody>${rows}</tbody></table>`;
 }
 
+// ─── WALLET ───────────────────────────────────────────────────────
 function renderWallet() {
-  const txs = load('wallet').sort((a,b) => b.date.localeCompare(a.date));
-  const tradeRel = txs.filter(isTradeRelevant);
-  const capital = txs.filter(t => !isTradeRelevant(t));
-  const deps = tradeRel.filter(t => (t.type||'').includes('Deposit'));
-  const withs = tradeRel.filter(t => (t.type||'').includes('Withdrawal'));
-  const totalDep = deps.reduce((s,t) => s+parseFloat(t.netAmount||0), 0);
-  const totalWith = withs.reduce((s,t) => s+parseFloat(t.netAmount||0), 0);
-  const capitalTotal = capital.reduce((s,t) => s+parseFloat(t.netAmount||0), 0);
-  document.getElementById('walletMetrics').innerHTML = `
-    <div class="metric"><div class="metric-label">Transaktionen gesamt</div><div class="metric-value">${txs.length}</div></div>
-    <div class="metric"><div class="metric-label">Trade-Deposits</div><div class="metric-value green">+${fmt(totalDep)}</div></div>
-    <div class="metric"><div class="metric-label">Trade-Withdrawals</div><div class="metric-value red">-${fmt(totalWith)}</div></div>
-    <div class="metric"><div class="metric-label">Kapitalumschichtungen</div><div class="metric-value" style="color:#6a1fa0">${capital.length} Tx / ${fmt(capitalTotal)}</div></div>`;
-  if (capital.length > 0) {
-    document.getElementById('walletCapitalInfo').innerHTML = `<div class="info-box">
-      <strong>💡 ${capital.length} Kapitalumschichtungen herausgefiltert</strong> (Transaktionen ≥ ${fmt(capitalThreshold)}): 
-      ${capital.map(c => `<span style="margin:0 4px">${c.date}: ${c.type?.includes('Deposit')?'📥':'📤'} ${fmt(c.netAmount)}</span>`).join('')}
-    </div>`;
-  } else { document.getElementById('walletCapitalInfo').innerHTML = ''; }
-  if (!txs.length) { document.getElementById('walletTable').innerHTML = '<div class="empty">Noch keine Wallet-Daten importiert.</div>'; return; }
-  const rows = txs.map((t,i) => {
-    const isDep = (t.type||'').includes('Deposit');
-    const isCap = !isTradeRelevant(t);
-    return `<tr style="${isCap?'opacity:0.5;':''}">
+  const txs = load('wallet').sort((a,b)=>b.date.localeCompare(a.date));
+  const pw = txs.filter(isPropWithdrawal);
+  const pd = txs.filter(isPropDeposit);
+  const cap = txs.filter(isCapital);
+  const twAmt = pw.reduce((s,t)=>s+parseFloat(t.netAmount||0),0);
+  document.getElementById('walletMet').innerHTML = `
+    <div class="metric"><div class="metric-label">Transaktionen</div><div class="metric-value">${txs.length}</div></div>
+    <div class="metric"><div class="metric-label">Prop Withdrawals</div><div class="metric-value green">${fmt(twAmt)}</div></div>
+    <div class="metric"><div class="metric-label">Prop Deposits</div><div class="metric-value" style="color:var(--blue)">${fmt(pd.reduce((s,t)=>s+parseFloat(t.netAmount||0),0))}</div></div>
+    <div class="metric"><div class="metric-label">Kapitalumschichtungen</div><div class="metric-value" style="color:#6a1fa0">${cap.length} Tx</div></div>`;
+  if(!txs.length){document.getElementById('walletTable').innerHTML='<div class="empty">Noch keine Wallet-Daten.</div>';return;}
+  const rows = txs.map((t,i)=>{
+    const isCap=isCapital(t);
+    const isDep=(t.type||'').includes('Deposit');
+    return `<tr style="${isCap?'opacity:0.45':''}">
       <td style="font-size:11px;color:var(--text3)">${t.id||''}</td>
       <td>${t.date}</td>
-      <td><span class="badge ${isCap?'badge-capital':isDep?'badge-dep':'badge-with'}">${isCap?'💰 Kapital':t.type||''}</span></td>
+      <td><span class="badge ${isCap?'badge-warn':isDep?'badge-ok':'badge-err'}">${isCap?'💰 Kapital':t.type}</span></td>
       <td class="${isDep?'pnl-pos':'pnl-neg'}">${isDep?'+':'-'}${fmt(t.netAmount||0)}</td>
       <td><span class="badge badge-ok">${t.status||'Approved'}</span></td>
-      <td><button class="delete-btn" onclick="delItem('wallet',${i})">✕</button></td>
+      <td><button class="del-btn" onclick="delItem('wallet',${i})">✕</button></td>
     </tr>`;
   }).join('');
-  document.getElementById('walletTable').innerHTML = `<table><thead><tr><th>ID</th><th>Datum</th><th>Typ</th><th>Betrag</th><th>Status</th><th></th></tr></thead><tbody>${rows}</tbody></table>`;
+  document.getElementById('walletTable').innerHTML=`<table><thead><tr><th>ID</th><th>Datum</th><th>Typ</th><th>Betrag</th><th>Status</th><th></th></tr></thead><tbody>${rows}</tbody></table>`;
 }
 
+// ─── STRATEGIEN ───────────────────────────────────────────────────
 function renderStrategien() {
-  const strats = load('strategien');
-  const totalInv = strats.reduce((s,t) => s+parseFloat(t.invested||0), 0);
-  const totalBal = strats.reduce((s,t) => s+parseFloat(t.balance||0), 0);
-  const totalPnl = strats.reduce((s,t) => s+parseFloat(t.pnl||0), 0);
-  document.getElementById('stratMetrics').innerHTML = `
-    <div class="metric"><div class="metric-label">Konten</div><div class="metric-value">${strats.length}</div></div>
-    <div class="metric"><div class="metric-label">Investiert</div><div class="metric-value">${fmt(totalInv)}</div></div>
-    <div class="metric"><div class="metric-label">Balance gesamt</div><div class="metric-value green">${fmt(totalBal)}</div></div>
-    <div class="metric"><div class="metric-label">PNL gesamt</div><div class="metric-value green">+${fmt(totalPnl)}</div></div>`;
-  if (!strats.length) { document.getElementById('stratTable').innerHTML = '<div class="empty">Noch keine Strategiedaten importiert.<br><br>Schick Claude den Screenshot der Strategieübersicht (Tab "Strategies" auf Tag Markets) und importiere den JSON hier.</div>'; return; }
-  const rows = strats.map(s => `<tr>
-    <td><span class="badge ${s.strategy==='SONIC'?'badge-sonic':'badge-neo'}">${s.strategy}</span></td>
-    <td>${fmt(s.invested||0)}</td>
-    <td>${fmt(s.balance||0)}</td>
-    <td class="pnl-pos">+${parseFloat(s.roi||0).toFixed(2)}%</td>
-    <td class="pnl-pos">+${fmt(s.pnl||0)}</td>
-    <td style="font-size:11px;color:var(--text2)">${s.accountNr||''}</td>
-    <td><span class="badge badge-ok">${s.status||'Active'}</span></td>
+  const s=load('strategien');
+  document.getElementById('stratMet').innerHTML=`
+    <div class="metric"><div class="metric-label">Konten</div><div class="metric-value">${s.length}</div></div>
+    <div class="metric"><div class="metric-label">Investiert</div><div class="metric-value">${fmt(s.reduce((a,x)=>a+parseFloat(x.invested||0),0))}</div></div>
+    <div class="metric"><div class="metric-label">Balance</div><div class="metric-value green">${fmt(s.reduce((a,x)=>a+parseFloat(x.balance||0),0))}</div></div>
+    <div class="metric"><div class="metric-label">PNL gesamt</div><div class="metric-value green">+${fmt(s.reduce((a,x)=>a+parseFloat(x.pnl||0),0))}</div></div>`;
+  if(!s.length){document.getElementById('stratTable').innerHTML='<div class="empty">Noch keine Strategiedaten.<br>Schick Claude den Screenshot der Strategies-Übersicht auf Tag Markets.</div>';return;}
+  const rows=s.map(x=>`<tr>
+    <td><span class="badge ${x.strategy==='SONIC'?'badge-sonic':'badge-neo'}">${x.strategy}</span></td>
+    <td>${fmt(x.invested||0)}</td><td>${fmt(x.balance||0)}</td>
+    <td class="pnl-pos">+${parseFloat(x.roi||0).toFixed(2)}%</td>
+    <td class="pnl-pos">+${fmt(x.pnl||0)}</td>
+    <td style="font-size:11px;color:var(--text2)">${x.accountNr||''}</td>
+    <td><span class="badge badge-ok">${x.status||'Active'}</span></td>
   </tr>`).join('');
-  document.getElementById('stratTable').innerHTML = `<table><thead><tr><th>Strategie</th><th>Investiert</th><th>Balance</th><th>ROI</th><th>PNL</th><th>Konto #</th><th>Status</th></tr></thead><tbody>${rows}</tbody></table>`;
+  document.getElementById('stratTable').innerHTML=`<table><thead><tr><th>Strategie</th><th>Investiert</th><th>Balance</th><th>ROI</th><th>PNL</th><th>Konto #</th><th>Status</th></tr></thead><tbody>${rows}</tbody></table>`;
 }
 
-function renderPruefung() {
-  const trades = load('trades');
-  const wallet = load('wallet');
-  const cont = document.getElementById('pruefungContent');
-  if (!trades.length || !wallet.length) {
-    cont.innerHTML = '<div class="empty">Für die Prüfung werden Trades UND Wallet-Daten benötigt.</div>'; return;
-  }
-
-  // Only trade-relevant wallet entries
-  const tradeWallet = wallet.filter(isTradeRelevant);
-  const capitalEntries = wallet.filter(t => !isTradeRelevant(t));
-
-  const totalBrutto = trades.reduce((s,t) => s+parseFloat(t.pnl||0), 0);
-  const totalNetto = totalBrutto*(1-feeRate);
-  const totalFee = totalBrutto*feeRate;
-
-  const deps = tradeWallet.filter(t => (t.type||'').includes('Deposit'));
-  const withs = tradeWallet.filter(t => (t.type||'').includes('Withdrawal'));
-  const totalDep = deps.reduce((s,t) => s+parseFloat(t.netAmount||0), 0);
-  const totalWith = withs.reduce((s,t) => s+parseFloat(t.netAmount||0), 0);
-  const walletTotal = totalDep + totalWith;
-  const diff = Math.abs(totalNetto - walletTotal);
-  const tol = 0.50;
-  const st = diff <= tol ? 'ok' : diff <= 5.0 ? 'warn' : 'err';
-  const icons = { ok:'✅', warn:'⚠️', err:'❌' };
-  const labels = { ok:'Alles stimmt überein', warn:'Kleine Abweichung – bitte prüfen', err:'Abweichung – Handlungsbedarf' };
-  const pct = totalNetto > 0 ? ((diff/totalNetto)*100).toFixed(1) : '0';
-
-  // Per-date breakdown
-  const dates = [...new Set([...trades.map(t=>t.date), ...tradeWallet.map(w=>w.date)])].sort().reverse();
-  const dateRows = dates.map(date => {
-    const dayTrades = trades.filter(t => t.date===date);
-    const dayWallet = tradeWallet.filter(w => w.date===date);
-    const brutto = dayTrades.reduce((s,t) => s+parseFloat(t.pnl||0), 0);
-    const netto = brutto*(1-feeRate);
-    const wTotal = dayWallet.reduce((s,w) => s+parseFloat(w.netAmount||0), 0);
-    const d = Math.abs(netto-wTotal);
-    const ds = d<=tol?'ok':d<=5.0?'warn':'err';
-    const dLabel = {ok:'✓ OK', warn:'⚠ '+fmt(d), err:'✗ '+fmt(d)};
-    const nettoColor = netto>=0?'pnl-pos':'pnl-neg';
-    return `<tr>
-      <td>${date}</td>
-      <td>${dayTrades.length}</td>
-      <td class="${brutto>=0?'pnl-pos':'pnl-neg'}">${brutto>=0?'+':''}${fmt(brutto)}</td>
-      <td style="color:var(--red)">-${fmt(brutto*feeRate)}</td>
-      <td class="${nettoColor}">${netto>=0?'+':''}${fmt(netto)}</td>
-      <td>${fmt(wTotal)}</td>
-      <td>${netto.toFixed(2)===(wTotal).toFixed(2)?'—':netto>wTotal?'<span style="color:var(--red)">Wallet zu niedrig</span>':'<span style="color:var(--warn)">Wallet zu hoch</span>'}</td>
-      <td><span class="badge badge-${ds}">${dLabel[ds]}</span></td>
-    </tr>`;
-  }).join('');
-
-  cont.innerHTML = `
-    <div class="result-box ${st}">
-      <div class="result-icon">${icons[st]}</div>
-      <div class="result-text">
-        <h3>${labels[st]}</h3>
-        <p>Differenz: <strong>${fmt(diff)}</strong> (${pct}% des erwarteten Netto-PNL) — nach Herausrechnung von ${capitalEntries.length} Kapitalumschichtungen</p>
-      </div>
-    </div>
-    ${capitalEntries.length>0?`<div class="info-box"><strong>💰 ${capitalEntries.length} Kapitalumschichtungen wurden aus der Prüfung herausgerechnet</strong> (Transaktionen ≥ ${fmt(capitalThreshold)}). Diese erscheinen ausgegraut im Wallet-Tab.</div>`:''}
-    <div class="check-summary">
-      <div class="check-box">
-        <h3>Aus den Trades berechnet</h3>
-        <div class="check-row"><span>Brutto-PNL (${trades.length} Trades)</span><span class="pnl-pos">${fmt(totalBrutto)}</span></div>
-        <div class="check-row"><span>Gebühr (${(feeRate*100).toFixed(0)}%)</span><span style="color:var(--red)">-${fmt(totalFee)}</span></div>
-        <div class="check-row"><span><strong>Netto erwartet</strong></span><span class="pnl-pos"><strong>${fmt(totalNetto)}</strong></span></div>
-      </div>
-      <div class="check-box">
-        <h3>Aus dem Wallet (nur Trade-Transaktionen)</h3>
-        <div class="check-row"><span>Prop Deposits (${deps.length} Tx)</span><span class="pnl-pos">+${fmt(totalDep)}</span></div>
-        <div class="check-row"><span>Prop Withdrawals (${withs.length} Tx)</span><span style="color:var(--red)">+${fmt(totalWith)}</span></div>
-        <div class="check-row capital"><span>Kapitalumschichtungen (${capitalEntries.length} Tx)</span><span>herausgerechnet</span></div>
-        <div class="check-row"><span><strong>Wallet gesamt</strong></span><span><strong>${fmt(walletTotal)}</strong></span></div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header"><h2>Prüfung nach Datum</h2><span style="font-size:12px;color:var(--text3)">Kapitalumschichtungen werden nicht angezeigt</span></div>
-      <table><thead><tr><th>Datum</th><th>Trades</th><th>Brutto</th><th>Gebühr</th><th>Netto erwartet</th><th>Wallet</th><th>Richtung</th><th>Status</th></tr></thead>
-      <tbody>${dateRows}</tbody></table>
-    </div>`;
-}
-
-function delItem(type, idx) {
-  const d = load(type); d.splice(idx,1); save(type,d);
-  if(type==='trades') renderTrades();
-  if(type==='wallet') renderWallet();
+function delItem(type,idx) {
+  const d=load(type); d.splice(idx,1); save(type,d);
+  ({trades:renderTrades,wallet:renderWallet})[type]?.();
 }
 </script>
 </body>
