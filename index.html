@@ -7,63 +7,42 @@
 <title>Tag Markets – Kontrollcenter</title>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 :root {
-  --bg: #f7f6f3;
-  --surface: #ffffff;
-  --surface2: #f0efe9;
-  --border: rgba(0,0,0,0.10);
-  --border2: rgba(0,0,0,0.18);
-  --text: #1a1a18;
-  --text2: #6b6b65;
-  --text3: #9b9b93;
-  --green: #1a7a4a;
-  --green-bg: #e6f5ed;
-  --red: #c0392b;
-  --red-bg: #fdecea;
-  --warn: #a05c00;
-  --warn-bg: #fff4e0;
-  --blue: #1a4fa0;
-  --blue-bg: #e8eef8;
-  --radius: 10px;
-  --radius-sm: 6px;
+  --bg: #f7f6f3; --surface: #ffffff; --surface2: #f0efe9;
+  --border: rgba(0,0,0,0.10); --border2: rgba(0,0,0,0.18);
+  --text: #1a1a18; --text2: #6b6b65; --text3: #9b9b93;
+  --green: #1a7a4a; --green-bg: #e6f5ed;
+  --red: #c0392b; --red-bg: #fdecea;
+  --warn: #a05c00; --warn-bg: #fff4e0;
+  --blue: #1a4fa0; --blue-bg: #e8eef8;
+  --radius: 10px; --radius-sm: 6px;
 }
-
 body { font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.5; min-height: 100vh; }
-
 .app { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem; }
-
 header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 2rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border); }
 header h1 { font-size: 22px; font-weight: 600; letter-spacing: -0.3px; }
 header p { font-size: 13px; color: var(--text2); margin-top: 3px; }
+.fee-area { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
 .fee-badge { background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; padding: 5px 14px; font-size: 12px; color: var(--text2); }
 .fee-badge span { color: var(--text); font-weight: 600; }
-
-.nav { display: flex; gap: 4px; margin-bottom: 1.75rem; background: var(--surface2); border-radius: var(--radius); padding: 4px; width: fit-content; }
+.threshold-badge { background: var(--warn-bg); border: 1px solid rgba(160,92,0,0.2); border-radius: 20px; padding: 5px 14px; font-size: 12px; color: var(--warn); }
+.nav { display: flex; gap: 4px; margin-bottom: 1.75rem; background: var(--surface2); border-radius: var(--radius); padding: 4px; width: fit-content; flex-wrap: wrap; }
 .nav button { padding: 7px 18px; border: none; border-radius: var(--radius-sm); background: transparent; color: var(--text2); font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.15s; }
 .nav button.active { background: var(--surface); color: var(--text); box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
-
-.section { display: none; }
-.section.active { display: block; }
-
+.section { display: none; } .section.active { display: block; }
 .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 1.5rem; }
 .metric { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; }
 .metric-label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
-.metric-value { font-size: 24px; font-weight: 600; color: var(--text); }
-.metric-value.green { color: var(--green); }
-.metric-value.red { color: var(--red); }
-.metric-value.warn { color: var(--warn); }
-
+.metric-value { font-size: 22px; font-weight: 600; color: var(--text); }
+.metric-value.green { color: var(--green); } .metric-value.red { color: var(--red); }
 .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 1.5rem; }
-.card-header { padding: 14px 18px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+.card-header { padding: 14px 18px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
 .card-header h2 { font-size: 14px; font-weight: 600; }
-
 table { width: 100%; border-collapse: collapse; font-size: 13px; }
 th { text-align: left; padding: 9px 14px; font-size: 11px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 0.05em; background: var(--surface2); border-bottom: 1px solid var(--border); }
 td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: middle; }
 tr:last-child td { border-bottom: none; }
 tr:hover td { background: var(--bg); }
-
 .badge { display: inline-block; padding: 2px 9px; border-radius: 20px; font-size: 11px; font-weight: 600; }
 .badge-sonic { background: #e8eef8; color: #1a4fa0; }
 .badge-neo { background: #e6f5ed; color: #1a7a4a; }
@@ -72,21 +51,18 @@ tr:hover td { background: var(--bg); }
 .badge-err { background: var(--red-bg); color: var(--red); }
 .badge-dep { background: var(--green-bg); color: var(--green); }
 .badge-with { background: var(--red-bg); color: var(--red); }
-
+.badge-capital { background: #f0e8f8; color: #6a1fa0; }
 .pnl-pos { color: var(--green); font-weight: 600; }
 .pnl-neg { color: var(--red); font-weight: 600; }
-
-/* Import Box */
 .import-box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.5rem; }
 .import-box h2 { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
 .import-box p { font-size: 13px; color: var(--text2); margin-bottom: 1rem; }
-.import-tabs { display: flex; gap: 6px; margin-bottom: 1rem; }
+.import-tabs { display: flex; gap: 6px; margin-bottom: 1rem; flex-wrap: wrap; }
 .import-tab { padding: 5px 14px; border: 1px solid var(--border); border-radius: 20px; font-size: 12px; font-weight: 500; cursor: pointer; background: transparent; color: var(--text2); transition: all 0.15s; }
 .import-tab.active { background: var(--text); color: #fff; border-color: var(--text); }
 textarea { width: 100%; height: 140px; border: 1px solid var(--border2); border-radius: var(--radius-sm); padding: 10px 12px; font-family: 'Menlo', 'Monaco', monospace; font-size: 12px; resize: vertical; background: var(--bg); color: var(--text); outline: none; transition: border 0.15s; }
 textarea:focus { border-color: var(--blue); }
-.import-actions { display: flex; gap: 8px; margin-top: 10px; align-items: center; }
-
+.import-actions { display: flex; gap: 8px; margin-top: 10px; align-items: center; flex-wrap: wrap; }
 .btn { padding: 8px 18px; border-radius: var(--radius-sm); font-size: 13px; font-weight: 500; cursor: pointer; border: 1px solid var(--border2); background: var(--surface); color: var(--text); transition: all 0.15s; }
 .btn:hover { background: var(--surface2); }
 .btn-primary { background: var(--text); color: #fff; border-color: var(--text); }
@@ -94,17 +70,16 @@ textarea:focus { border-color: var(--blue); }
 .btn-danger { color: var(--red); border-color: rgba(192,57,43,0.3); }
 .btn-danger:hover { background: var(--red-bg); }
 .btn-sm { padding: 5px 12px; font-size: 12px; }
-
 .status-msg { font-size: 12px; padding: 6px 12px; border-radius: var(--radius-sm); display: none; }
 .status-msg.ok { background: var(--green-bg); color: var(--green); display: inline-block; }
 .status-msg.err { background: var(--red-bg); color: var(--red); display: inline-block; }
-
-/* Prüfung */
 .check-summary { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+@media(max-width:600px){ .check-summary { grid-template-columns: 1fr; } }
 .check-box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.5rem; }
 .check-box h3 { font-size: 12px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; }
 .check-row { display: flex; justify-content: space-between; font-size: 13px; padding: 5px 0; border-bottom: 1px solid var(--border); }
 .check-row:last-child { border-bottom: none; font-weight: 600; }
+.check-row.capital { color: var(--text3); font-style: italic; }
 .result-box { background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.5rem; display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
 .result-icon { font-size: 32px; }
 .result-text h3 { font-size: 16px; font-weight: 600; }
@@ -112,18 +87,16 @@ textarea:focus { border-color: var(--blue); }
 .result-box.ok { border-color: var(--green); background: var(--green-bg); }
 .result-box.warn { border-color: #e0a020; background: var(--warn-bg); }
 .result-box.err { border-color: var(--red); background: var(--red-bg); }
-
 .empty { text-align: center; padding: 3rem 1rem; color: var(--text3); font-size: 14px; }
-
-/* Anleitung */
 .instructions { background: var(--blue-bg); border: 1px solid rgba(26,79,160,0.2); border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; }
 .instructions h3 { font-size: 13px; font-weight: 600; color: var(--blue); margin-bottom: 8px; }
 .instructions ol { padding-left: 1.2rem; }
 .instructions li { font-size: 13px; color: var(--text2); margin-bottom: 4px; line-height: 1.6; }
-.instructions code { background: rgba(26,79,160,0.12); color: var(--blue); padding: 1px 6px; border-radius: 4px; font-size: 12px; }
-
+.info-box { background: var(--warn-bg); border: 1px solid rgba(160,92,0,0.2); border-radius: var(--radius); padding: 1rem 1.25rem; margin-bottom: 1.5rem; font-size: 13px; color: var(--warn); }
+.info-box strong { font-weight: 600; }
 .delete-btn { background: none; border: none; cursor: pointer; color: var(--text3); font-size: 16px; padding: 2px 4px; border-radius: 4px; transition: color 0.15s; }
 .delete-btn:hover { color: var(--red); }
+.detail-toggle { font-size: 11px; color: var(--blue); cursor: pointer; text-decoration: underline; white-space: nowrap; }
 </style>
 </head>
 <body>
@@ -133,17 +106,18 @@ textarea:focus { border-color: var(--blue); }
       <h1>Tag Markets – Kontrollcenter</h1>
       <p>Copy Trading Überwachung & Prüfung</p>
     </div>
-    <div class="fee-badge">Gebührensatz: <span id="feeDisplay">30%</span> &nbsp;·&nbsp;
-      <a href="#" onclick="changeFee()" style="color:var(--blue);font-size:12px;text-decoration:none;">ändern</a>
+    <div class="fee-area">
+      <div class="fee-badge">Gebührsatz: <span id="feeDisplay">30%</span> <a href="#" onclick="changeFee()" style="color:var(--blue);font-size:11px;margin-left:6px;text-decoration:none;">ändern</a></div>
+      <div class="threshold-badge">Kapitalgrenze: <strong id="thresholdDisplay">$50</strong> <a href="#" onclick="changeThreshold()" style="color:var(--warn);font-size:11px;margin-left:6px;text-decoration:none;">ändern</a></div>
     </div>
   </header>
 
   <nav class="nav">
-    <button class="active" onclick="switchTab('import', this)">📥 Daten einpflegen</button>
-    <button onclick="switchTab('trades', this)">📊 Trades</button>
-    <button onclick="switchTab('wallet', this)">💼 Wallet</button>
-    <button onclick="switchTab('pruefung', this)">✅ Prüfung</button>
-    <button onclick="switchTab('strategien', this)">📈 Strategien</button>
+    <button class="active" onclick="switchTab('import',this)">📥 Daten einpflegen</button>
+    <button onclick="switchTab('trades',this)">📊 Trades</button>
+    <button onclick="switchTab('wallet',this)">💼 Wallet</button>
+    <button onclick="switchTab('pruefung',this)">✅ Prüfung</button>
+    <button onclick="switchTab('strategien',this)">📈 Strategien</button>
   </nav>
 
   <!-- IMPORT -->
@@ -153,47 +127,36 @@ textarea:focus { border-color: var(--blue); }
       <ol>
         <li>Screenshot hier in den <strong>Claude Chat</strong> hochladen</li>
         <li>Claude liest die Daten aus und gibt dir einen <strong>JSON-Block</strong></li>
-        <li>Typ auswählen (Trades / Wallet / Strategien)</li>
-        <li>Den JSON-Block in das Textfeld unten einfügen</li>
-        <li><code>Importieren</code> klicken – fertig!</li>
+        <li>Typ auswählen → JSON einfügen → <strong>Importieren</strong></li>
       </ol>
     </div>
-
+    <div class="info-box">
+      <strong>⚙️ Kapitalgrenze:</strong> Wallet-Transaktionen über <strong id="thresholdInfo">$50</strong> werden als Kapitalumschichtung gewertet und aus der Trade-Prüfung herausgerechnet. Diese Grenze kannst du oben rechts anpassen.
+    </div>
     <div class="import-box">
       <h2>Daten einfügen</h2>
-      <p>Wähle den Typ, füge den von Claude generierten JSON-Block ein und klicke Importieren.</p>
+      <p>Typ wählen, JSON-Block einfügen, Importieren klicken.</p>
       <div class="import-tabs">
         <button class="import-tab active" id="itab-trades" onclick="setImportType('trades')">📊 Trades</button>
         <button class="import-tab" id="itab-wallet" onclick="setImportType('wallet')">💼 Wallet</button>
         <button class="import-tab" id="itab-strategien" onclick="setImportType('strategien')">📈 Strategien</button>
       </div>
-      <textarea id="importText" placeholder='Hier den JSON von Claude einfügen, z.B.:
-[{"date":"2026-06-03","strategy":"SONIC","pnl":11.35, ...}]'></textarea>
+      <textarea id="importText" placeholder='Hier den JSON von Claude einfügen...'></textarea>
       <div class="import-actions">
         <button class="btn btn-primary" onclick="importData()">Importieren</button>
         <button class="btn" onclick="document.getElementById('importText').value=''">Leeren</button>
         <span class="status-msg" id="importStatus"></span>
       </div>
     </div>
-
     <div class="card">
       <div class="card-header"><h2>Datenstand</h2></div>
-      <div style="padding:1rem 1.5rem; display:grid; grid-template-columns:repeat(3,1fr); gap:1rem;">
-        <div>
-          <div style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;">Trades gespeichert</div>
-          <div style="font-size:28px;font-weight:600;" id="countTrades">0</div>
-        </div>
-        <div>
-          <div style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;">Wallet-Transaktionen</div>
-          <div style="font-size:28px;font-weight:600;" id="countWallet">0</div>
-        </div>
-        <div>
-          <div style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;">Strategien</div>
-          <div style="font-size:28px;font-weight:600;" id="countStrat">0</div>
-        </div>
+      <div style="padding:1rem 1.5rem; display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:1rem;">
+        <div><div style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;">Trades</div><div style="font-size:28px;font-weight:600;" id="countTrades">0</div></div>
+        <div><div style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;">Wallet-Transaktionen</div><div style="font-size:28px;font-weight:600;" id="countWallet">0</div></div>
+        <div><div style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;">davon Trade-relevant</div><div style="font-size:28px;font-weight:600;" id="countWalletFiltered">0</div></div>
+        <div><div style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;">Strategien</div><div style="font-size:28px;font-weight:600;" id="countStrat">0</div></div>
       </div>
     </div>
-
     <div style="margin-top:1rem;">
       <button class="btn btn-danger btn-sm" onclick="clearAll()">⚠ Alle Daten löschen</button>
     </div>
@@ -203,10 +166,7 @@ textarea:focus { border-color: var(--blue); }
   <div id="sec-trades" class="section">
     <div class="metrics" id="tradesMetrics"></div>
     <div class="card">
-      <div class="card-header">
-        <h2>Alle Trades</h2>
-        <button class="btn btn-sm btn-danger" onclick="clearSection('trades')">Löschen</button>
-      </div>
+      <div class="card-header"><h2>Alle Trades</h2><button class="btn btn-sm btn-danger" onclick="clearSection('trades')">Löschen</button></div>
       <div id="tradesTable"></div>
     </div>
   </div>
@@ -214,11 +174,9 @@ textarea:focus { border-color: var(--blue); }
   <!-- WALLET -->
   <div id="sec-wallet" class="section">
     <div class="metrics" id="walletMetrics"></div>
+    <div id="walletCapitalInfo"></div>
     <div class="card">
-      <div class="card-header">
-        <h2>Transaktionen</h2>
-        <button class="btn btn-sm btn-danger" onclick="clearSection('wallet')">Löschen</button>
-      </div>
+      <div class="card-header"><h2>Alle Transaktionen</h2><button class="btn btn-sm btn-danger" onclick="clearSection('wallet')">Löschen</button></div>
       <div id="walletTable"></div>
     </div>
   </div>
@@ -232,113 +190,111 @@ textarea:focus { border-color: var(--blue); }
   <div id="sec-strategien" class="section">
     <div class="metrics" id="stratMetrics"></div>
     <div class="card">
-      <div class="card-header">
-        <h2>Aktive Strategien</h2>
-        <button class="btn btn-sm btn-danger" onclick="clearSection('strategien')">Löschen</button>
-      </div>
+      <div class="card-header"><h2>Aktive Strategien</h2><button class="btn btn-sm btn-danger" onclick="clearSection('strategien')">Löschen</button></div>
       <div id="stratTable"></div>
     </div>
   </div>
 </div>
 
 <script>
-const KEYS = { trades: 'tm_trades', wallet: 'tm_wallet', strategien: 'tm_strategien', fee: 'tm_fee' };
+const KEYS = { trades:'tm_trades', wallet:'tm_wallet', strategien:'tm_strategien', fee:'tm_fee', threshold:'tm_threshold' };
 let importType = 'trades';
 let feeRate = parseFloat(localStorage.getItem(KEYS.fee) || '0.30');
-document.getElementById('feeDisplay').textContent = (feeRate * 100).toFixed(0) + '%';
+let capitalThreshold = parseFloat(localStorage.getItem(KEYS.threshold) || '50');
+
+function updateDisplays() {
+  document.getElementById('feeDisplay').textContent = (feeRate*100).toFixed(0)+'%';
+  document.getElementById('thresholdDisplay').textContent = '$'+capitalThreshold.toFixed(0);
+  document.getElementById('thresholdInfo').textContent = '$'+capitalThreshold.toFixed(0);
+}
+updateDisplays();
 
 function load(k) { try { return JSON.parse(localStorage.getItem(KEYS[k]) || '[]'); } catch(e) { return []; } }
 function save(k, d) { localStorage.setItem(KEYS[k], JSON.stringify(d)); updateCounts(); }
 
+// Filter: only Prop Deposits/Withdrawals under the capital threshold
+function isTradeRelevant(tx) {
+  const isPropType = (tx.type||'').startsWith('Prop');
+  const underThreshold = parseFloat(tx.netAmount||0) < capitalThreshold;
+  return isPropType && underThreshold;
+}
+
 function updateCounts() {
+  const wallet = load('wallet');
   document.getElementById('countTrades').textContent = load('trades').length;
-  document.getElementById('countWallet').textContent = load('wallet').length;
+  document.getElementById('countWallet').textContent = wallet.length;
+  document.getElementById('countWalletFiltered').textContent = wallet.filter(isTradeRelevant).length;
   document.getElementById('countStrat').textContent = load('strategien').length;
 }
 updateCounts();
 
+function changeFee() {
+  const v = prompt('Gebührensatz in % eingeben:', (feeRate*100).toFixed(0));
+  if (v && !isNaN(v)) { feeRate = parseFloat(v)/100; localStorage.setItem(KEYS.fee, feeRate); updateDisplays(); }
+}
+function changeThreshold() {
+  const v = prompt('Kapitalgrenze in USD eingeben.\nTransaktionen ÜBER diesem Betrag werden als Kapitalumschichtung gewertet und aus der Trade-Prüfung herausgerechnet:', capitalThreshold.toFixed(0));
+  if (v && !isNaN(v)) { capitalThreshold = parseFloat(v); localStorage.setItem(KEYS.threshold, capitalThreshold); updateDisplays(); updateCounts(); }
+}
+
 function switchTab(t, btn) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
-  document.getElementById('sec-' + t).classList.add('active');
+  document.getElementById('sec-'+t).classList.add('active');
   if(btn) btn.classList.add('active');
-  const renders = { trades: renderTrades, wallet: renderWallet, pruefung: renderPruefung, strategien: renderStrategien };
+  const renders = { trades:renderTrades, wallet:renderWallet, pruefung:renderPruefung, strategien:renderStrategien };
   if(renders[t]) renders[t]();
 }
 
 function setImportType(t) {
   importType = t;
   document.querySelectorAll('.import-tab').forEach(b => b.classList.remove('active'));
-  document.getElementById('itab-' + t).classList.add('active');
+  document.getElementById('itab-'+t).classList.add('active');
 }
 
 function setStatus(msg, type) {
   const el = document.getElementById('importStatus');
-  el.className = 'status-msg ' + type;
-  el.textContent = msg;
-  setTimeout(() => { el.className = 'status-msg'; el.textContent = ''; }, 3000);
+  el.className = 'status-msg '+type; el.textContent = msg;
+  setTimeout(() => { el.className = 'status-msg'; el.textContent = ''; }, 4000);
 }
 
 function importData() {
   const raw = document.getElementById('importText').value.trim();
   if (!raw) { setStatus('Kein Inhalt', 'err'); return; }
   let parsed;
-  try {
-    let clean = raw.replace(/```json|```/g, '').trim();
-    parsed = JSON.parse(clean);
-    if (!Array.isArray(parsed)) throw new Error('Kein Array');
-  } catch(e) { setStatus('Ungültiges JSON: ' + e.message, 'err'); return; }
-
+  try { let clean = raw.replace(/```json|```/g,'').trim(); parsed = JSON.parse(clean); if(!Array.isArray(parsed)) throw new Error('Kein Array'); }
+  catch(e) { setStatus('Ungültiges JSON: '+e.message, 'err'); return; }
   const existing = load(importType);
   let merged, added = 0;
-
   if (importType === 'trades') {
     const ids = new Set(existing.map(t => t.date+'_'+t.strategy+'_'+t.entryTime+'_'+t.size+'_'+t.pnl));
     const deduped = parsed.filter(t => !ids.has(t.date+'_'+t.strategy+'_'+t.entryTime+'_'+t.size+'_'+t.pnl));
-    added = deduped.length;
-    merged = [...existing, ...deduped];
+    added = deduped.length; merged = [...existing, ...deduped];
   } else if (importType === 'wallet') {
     const ids = new Set(existing.map(t => t.id));
     const deduped = parsed.filter(t => !ids.has(t.id));
-    added = deduped.length;
-    merged = [...existing, ...deduped];
-  } else {
-    merged = parsed; added = parsed.length;
-  }
-
+    added = deduped.length; merged = [...existing, ...deduped];
+  } else { merged = parsed; added = parsed.length; }
   save(importType, merged);
   document.getElementById('importText').value = '';
-  setStatus('✓ ' + added + ' Einträge importiert', 'ok');
+  setStatus('✓ '+added+' Einträge importiert', 'ok');
 }
 
-function clearSection(k) {
-  if (confirm('Alle ' + k + '-Daten löschen?')) { save(k, []); switchTab(k); }
-}
-function clearAll() {
-  if (confirm('ALLE Daten unwiderruflich löschen?')) {
-    ['trades','wallet','strategien'].forEach(k => save(k, []));
-    updateCounts();
-  }
-}
-function changeFee() {
-  const v = prompt('Gebührensatz in % eingeben:', (feeRate*100).toFixed(0));
-  if (v && !isNaN(v)) {
-    feeRate = parseFloat(v) / 100;
-    localStorage.setItem(KEYS.fee, feeRate);
-    document.getElementById('feeDisplay').textContent = (feeRate*100).toFixed(0) + '%';
-  }
-}
+function clearSection(k) { if(confirm('Alle '+k+'-Daten löschen?')) { save(k, []); switchTab(k); } }
+function clearAll() { if(confirm('ALLE Daten unwiderruflich löschen?')) { ['trades','wallet','strategien'].forEach(k => save(k, [])); updateCounts(); } }
+
+function fmt(n) { return '$'+parseFloat(n).toFixed(2); }
+function fmtPos(n) { return (n>=0?'+':'')+fmt(n); }
 
 function renderTrades() {
   const trades = load('trades').sort((a,b) => b.date.localeCompare(a.date));
-  const totalBrutto = trades.reduce((s,t) => s + parseFloat(t.pnl||0), 0);
-  const totalNetto = totalBrutto * (1 - feeRate);
-  const totalFee = totalBrutto * feeRate;
+  const totalBrutto = trades.reduce((s,t) => s+parseFloat(t.pnl||0), 0);
+  const totalNetto = totalBrutto*(1-feeRate);
   document.getElementById('tradesMetrics').innerHTML = `
     <div class="metric"><div class="metric-label">Trades</div><div class="metric-value">${trades.length}</div></div>
-    <div class="metric"><div class="metric-label">Brutto-PNL</div><div class="metric-value green">+$${totalBrutto.toFixed(2)}</div></div>
-    <div class="metric"><div class="metric-label">Gebühr (${(feeRate*100).toFixed(0)}%)</div><div class="metric-value red">-$${totalFee.toFixed(2)}</div></div>
-    <div class="metric"><div class="metric-label">Netto-PNL</div><div class="metric-value green">+$${totalNetto.toFixed(2)}</div></div>`;
+    <div class="metric"><div class="metric-label">Brutto-PNL</div><div class="metric-value green">+${fmt(totalBrutto)}</div></div>
+    <div class="metric"><div class="metric-label">Gebühr (${(feeRate*100).toFixed(0)}%)</div><div class="metric-value red">-${fmt(totalBrutto*feeRate)}</div></div>
+    <div class="metric"><div class="metric-label">Netto-PNL</div><div class="metric-value green">+${fmt(totalNetto)}</div></div>`;
   if (!trades.length) { document.getElementById('tradesTable').innerHTML = '<div class="empty">Noch keine Trades importiert.</div>'; return; }
   const rows = trades.map((t,i) => `<tr>
     <td>${t.date}</td>
@@ -346,34 +302,44 @@ function renderTrades() {
     <td>${t.instrument||''}</td>
     <td style="color:var(--text2)">${t.size||''}</td>
     <td style="color:var(--text2)">${t.entryTime||''}→${t.exitTime||''}</td>
-    <td class="pnl-pos">+$${parseFloat(t.pnl).toFixed(2)}</td>
-    <td class="pnl-pos">+$${(parseFloat(t.pnl)*(1-feeRate)).toFixed(2)}</td>
-    <td><button class="delete-btn" onclick="delItem('trades',${i})" title="Löschen">✕</button></td>
+    <td class="${parseFloat(t.pnl)>=0?'pnl-pos':'pnl-neg'}">${parseFloat(t.pnl)>=0?'+':''}${fmt(t.pnl)}</td>
+    <td class="${parseFloat(t.pnl)>=0?'pnl-pos':'pnl-neg'}">${parseFloat(t.pnl)*(1-feeRate)>=0?'+':''}${fmt(parseFloat(t.pnl)*(1-feeRate))}</td>
+    <td><button class="delete-btn" onclick="delItem('trades',${i})">✕</button></td>
   </tr>`).join('');
   document.getElementById('tradesTable').innerHTML = `<table><thead><tr><th>Datum</th><th>Strategie</th><th>Instrument</th><th>Size</th><th>Zeit</th><th>Brutto-PNL</th><th>Netto</th><th></th></tr></thead><tbody>${rows}</tbody></table>`;
 }
 
 function renderWallet() {
   const txs = load('wallet').sort((a,b) => b.date.localeCompare(a.date));
-  const deps = txs.filter(t => (t.type||'').includes('Deposit'));
-  const withs = txs.filter(t => (t.type||'').includes('Withdrawal'));
-  const totalDep = deps.reduce((s,t) => s + parseFloat(t.netAmount||0), 0);
-  const totalWith = withs.reduce((s,t) => s + parseFloat(t.netAmount||0), 0);
+  const tradeRel = txs.filter(isTradeRelevant);
+  const capital = txs.filter(t => !isTradeRelevant(t));
+  const deps = tradeRel.filter(t => (t.type||'').includes('Deposit'));
+  const withs = tradeRel.filter(t => (t.type||'').includes('Withdrawal'));
+  const totalDep = deps.reduce((s,t) => s+parseFloat(t.netAmount||0), 0);
+  const totalWith = withs.reduce((s,t) => s+parseFloat(t.netAmount||0), 0);
+  const capitalTotal = capital.reduce((s,t) => s+parseFloat(t.netAmount||0), 0);
   document.getElementById('walletMetrics').innerHTML = `
-    <div class="metric"><div class="metric-label">Transaktionen</div><div class="metric-value">${txs.length}</div></div>
-    <div class="metric"><div class="metric-label">Deposits</div><div class="metric-value green">+$${totalDep.toFixed(2)}</div></div>
-    <div class="metric"><div class="metric-label">Withdrawals</div><div class="metric-value red">-$${totalWith.toFixed(2)}</div></div>
-    <div class="metric"><div class="metric-label">Saldo Wallet</div><div class="metric-value">$${(totalDep - totalWith).toFixed(2)}</div></div>`;
+    <div class="metric"><div class="metric-label">Transaktionen gesamt</div><div class="metric-value">${txs.length}</div></div>
+    <div class="metric"><div class="metric-label">Trade-Deposits</div><div class="metric-value green">+${fmt(totalDep)}</div></div>
+    <div class="metric"><div class="metric-label">Trade-Withdrawals</div><div class="metric-value red">-${fmt(totalWith)}</div></div>
+    <div class="metric"><div class="metric-label">Kapitalumschichtungen</div><div class="metric-value" style="color:#6a1fa0">${capital.length} Tx / ${fmt(capitalTotal)}</div></div>`;
+  if (capital.length > 0) {
+    document.getElementById('walletCapitalInfo').innerHTML = `<div class="info-box">
+      <strong>💡 ${capital.length} Kapitalumschichtungen herausgefiltert</strong> (Transaktionen ≥ ${fmt(capitalThreshold)}): 
+      ${capital.map(c => `<span style="margin:0 4px">${c.date}: ${c.type?.includes('Deposit')?'📥':'📤'} ${fmt(c.netAmount)}</span>`).join('')}
+    </div>`;
+  } else { document.getElementById('walletCapitalInfo').innerHTML = ''; }
   if (!txs.length) { document.getElementById('walletTable').innerHTML = '<div class="empty">Noch keine Wallet-Daten importiert.</div>'; return; }
   const rows = txs.map((t,i) => {
     const isDep = (t.type||'').includes('Deposit');
-    return `<tr>
+    const isCap = !isTradeRelevant(t);
+    return `<tr style="${isCap?'opacity:0.5;':''}">
       <td style="font-size:11px;color:var(--text3)">${t.id||''}</td>
       <td>${t.date}</td>
-      <td><span class="badge ${isDep?'badge-dep':'badge-with'}">${t.type||''}</span></td>
-      <td class="${isDep?'pnl-pos':'pnl-neg'}">${isDep?'+':'-'}$${parseFloat(t.netAmount||0).toFixed(2)}</td>
+      <td><span class="badge ${isCap?'badge-capital':isDep?'badge-dep':'badge-with'}">${isCap?'💰 Kapital':t.type||''}</span></td>
+      <td class="${isDep?'pnl-pos':'pnl-neg'}">${isDep?'+':'-'}${fmt(t.netAmount||0)}</td>
       <td><span class="badge badge-ok">${t.status||'Approved'}</span></td>
-      <td><button class="delete-btn" onclick="delItem('wallet',${i})" title="Löschen">✕</button></td>
+      <td><button class="delete-btn" onclick="delItem('wallet',${i})">✕</button></td>
     </tr>`;
   }).join('');
   document.getElementById('walletTable').innerHTML = `<table><thead><tr><th>ID</th><th>Datum</th><th>Typ</th><th>Betrag</th><th>Status</th><th></th></tr></thead><tbody>${rows}</tbody></table>`;
@@ -381,21 +347,21 @@ function renderWallet() {
 
 function renderStrategien() {
   const strats = load('strategien');
-  const totalInv = strats.reduce((s,t) => s + parseFloat(t.invested||0), 0);
-  const totalBal = strats.reduce((s,t) => s + parseFloat(t.balance||0), 0);
-  const totalPnl = strats.reduce((s,t) => s + parseFloat(t.pnl||0), 0);
+  const totalInv = strats.reduce((s,t) => s+parseFloat(t.invested||0), 0);
+  const totalBal = strats.reduce((s,t) => s+parseFloat(t.balance||0), 0);
+  const totalPnl = strats.reduce((s,t) => s+parseFloat(t.pnl||0), 0);
   document.getElementById('stratMetrics').innerHTML = `
     <div class="metric"><div class="metric-label">Konten</div><div class="metric-value">${strats.length}</div></div>
-    <div class="metric"><div class="metric-label">Investiert</div><div class="metric-value">$${totalInv.toFixed(2)}</div></div>
-    <div class="metric"><div class="metric-label">Balance gesamt</div><div class="metric-value green">$${totalBal.toFixed(2)}</div></div>
-    <div class="metric"><div class="metric-label">PNL gesamt</div><div class="metric-value green">+$${totalPnl.toFixed(2)}</div></div>`;
-  if (!strats.length) { document.getElementById('stratTable').innerHTML = '<div class="empty">Noch keine Strategiedaten importiert.</div>'; return; }
+    <div class="metric"><div class="metric-label">Investiert</div><div class="metric-value">${fmt(totalInv)}</div></div>
+    <div class="metric"><div class="metric-label">Balance gesamt</div><div class="metric-value green">${fmt(totalBal)}</div></div>
+    <div class="metric"><div class="metric-label">PNL gesamt</div><div class="metric-value green">+${fmt(totalPnl)}</div></div>`;
+  if (!strats.length) { document.getElementById('stratTable').innerHTML = '<div class="empty">Noch keine Strategiedaten importiert.<br><br>Schick Claude den Screenshot der Strategieübersicht (Tab "Strategies" auf Tag Markets) und importiere den JSON hier.</div>'; return; }
   const rows = strats.map(s => `<tr>
     <td><span class="badge ${s.strategy==='SONIC'?'badge-sonic':'badge-neo'}">${s.strategy}</span></td>
-    <td>$${parseFloat(s.invested||0).toFixed(2)}</td>
-    <td>$${parseFloat(s.balance||0).toFixed(2)}</td>
+    <td>${fmt(s.invested||0)}</td>
+    <td>${fmt(s.balance||0)}</td>
     <td class="pnl-pos">+${parseFloat(s.roi||0).toFixed(2)}%</td>
-    <td class="pnl-pos">+$${parseFloat(s.pnl||0).toFixed(2)}</td>
+    <td class="pnl-pos">+${fmt(s.pnl||0)}</td>
     <td style="font-size:11px;color:var(--text2)">${s.accountNr||''}</td>
     <td><span class="badge badge-ok">${s.status||'Active'}</span></td>
   </tr>`).join('');
@@ -409,37 +375,47 @@ function renderPruefung() {
   if (!trades.length || !wallet.length) {
     cont.innerHTML = '<div class="empty">Für die Prüfung werden Trades UND Wallet-Daten benötigt.</div>'; return;
   }
-  const totalBrutto = trades.reduce((s,t) => s + parseFloat(t.pnl||0), 0);
-  const totalNetto = totalBrutto * (1 - feeRate);
-  const totalFee = totalBrutto * feeRate;
-  const deps = wallet.filter(t => (t.type||'').includes('Deposit'));
-  const withs = wallet.filter(t => (t.type||'').includes('Withdrawal'));
-  const totalDep = deps.reduce((s,t) => s + parseFloat(t.netAmount||0), 0);
-  const totalWith = withs.reduce((s,t) => s + parseFloat(t.netAmount||0), 0);
+
+  // Only trade-relevant wallet entries
+  const tradeWallet = wallet.filter(isTradeRelevant);
+  const capitalEntries = wallet.filter(t => !isTradeRelevant(t));
+
+  const totalBrutto = trades.reduce((s,t) => s+parseFloat(t.pnl||0), 0);
+  const totalNetto = totalBrutto*(1-feeRate);
+  const totalFee = totalBrutto*feeRate;
+
+  const deps = tradeWallet.filter(t => (t.type||'').includes('Deposit'));
+  const withs = tradeWallet.filter(t => (t.type||'').includes('Withdrawal'));
+  const totalDep = deps.reduce((s,t) => s+parseFloat(t.netAmount||0), 0);
+  const totalWith = withs.reduce((s,t) => s+parseFloat(t.netAmount||0), 0);
   const walletTotal = totalDep + totalWith;
   const diff = Math.abs(totalNetto - walletTotal);
-  const tol = 0.15;
-  const st = diff <= tol ? 'ok' : diff <= 2.0 ? 'warn' : 'err';
-  const icons = { ok: '✅', warn: '⚠️', err: '❌' };
-  const labels = { ok: 'Alles stimmt überein', warn: 'Kleine Abweichung – bitte prüfen', err: 'Abweichung – Handlungsbedarf' };
+  const tol = 0.50;
+  const st = diff <= tol ? 'ok' : diff <= 5.0 ? 'warn' : 'err';
+  const icons = { ok:'✅', warn:'⚠️', err:'❌' };
+  const labels = { ok:'Alles stimmt überein', warn:'Kleine Abweichung – bitte prüfen', err:'Abweichung – Handlungsbedarf' };
+  const pct = totalNetto > 0 ? ((diff/totalNetto)*100).toFixed(1) : '0';
 
-  const dates = [...new Set([...trades.map(t=>t.date), ...wallet.map(w=>w.date)])].sort().reverse();
+  // Per-date breakdown
+  const dates = [...new Set([...trades.map(t=>t.date), ...tradeWallet.map(w=>w.date)])].sort().reverse();
   const dateRows = dates.map(date => {
-    const dayTrades = trades.filter(t => t.date === date);
-    const dayWallet = wallet.filter(w => w.date === date);
-    const brutto = dayTrades.reduce((s,t) => s + parseFloat(t.pnl||0), 0);
-    const netto = brutto * (1 - feeRate);
-    const wTotal = dayWallet.reduce((s,w) => s + parseFloat(w.netAmount||0), 0);
-    const d = Math.abs(netto - wTotal);
-    const ds = d <= tol ? 'ok' : d <= 2.0 ? 'warn' : 'err';
-    const dLabel = { ok: '✓ OK', warn: '⚠ $'+d.toFixed(2), err: '✗ $'+d.toFixed(2) };
+    const dayTrades = trades.filter(t => t.date===date);
+    const dayWallet = tradeWallet.filter(w => w.date===date);
+    const brutto = dayTrades.reduce((s,t) => s+parseFloat(t.pnl||0), 0);
+    const netto = brutto*(1-feeRate);
+    const wTotal = dayWallet.reduce((s,w) => s+parseFloat(w.netAmount||0), 0);
+    const d = Math.abs(netto-wTotal);
+    const ds = d<=tol?'ok':d<=5.0?'warn':'err';
+    const dLabel = {ok:'✓ OK', warn:'⚠ '+fmt(d), err:'✗ '+fmt(d)};
+    const nettoColor = netto>=0?'pnl-pos':'pnl-neg';
     return `<tr>
       <td>${date}</td>
       <td>${dayTrades.length}</td>
-      <td class="pnl-pos">$${brutto.toFixed(2)}</td>
-      <td style="color:var(--red)">-$${(brutto*feeRate).toFixed(2)}</td>
-      <td class="pnl-pos">$${netto.toFixed(2)}</td>
-      <td>$${wTotal.toFixed(2)}</td>
+      <td class="${brutto>=0?'pnl-pos':'pnl-neg'}">${brutto>=0?'+':''}${fmt(brutto)}</td>
+      <td style="color:var(--red)">-${fmt(brutto*feeRate)}</td>
+      <td class="${nettoColor}">${netto>=0?'+':''}${fmt(netto)}</td>
+      <td>${fmt(wTotal)}</td>
+      <td>${netto.toFixed(2)===(wTotal).toFixed(2)?'—':netto>wTotal?'<span style="color:var(--red)">Wallet zu niedrig</span>':'<span style="color:var(--warn)">Wallet zu hoch</span>'}</td>
       <td><span class="badge badge-${ds}">${dLabel[ds]}</span></td>
     </tr>`;
   }).join('');
@@ -449,32 +425,34 @@ function renderPruefung() {
       <div class="result-icon">${icons[st]}</div>
       <div class="result-text">
         <h3>${labels[st]}</h3>
-        <p>Differenz zwischen erwartetem Netto-PNL und Wallet-Transaktionen: <strong>$${diff.toFixed(2)}</strong></p>
+        <p>Differenz: <strong>${fmt(diff)}</strong> (${pct}% des erwarteten Netto-PNL) — nach Herausrechnung von ${capitalEntries.length} Kapitalumschichtungen</p>
       </div>
     </div>
+    ${capitalEntries.length>0?`<div class="info-box"><strong>💰 ${capitalEntries.length} Kapitalumschichtungen wurden aus der Prüfung herausgerechnet</strong> (Transaktionen ≥ ${fmt(capitalThreshold)}). Diese erscheinen ausgegraut im Wallet-Tab.</div>`:''}
     <div class="check-summary">
       <div class="check-box">
         <h3>Aus den Trades berechnet</h3>
-        <div class="check-row"><span>Brutto-PNL</span><span class="pnl-pos">$${totalBrutto.toFixed(2)}</span></div>
-        <div class="check-row"><span>Gebühr (${(feeRate*100).toFixed(0)}%)</span><span style="color:var(--red)">-$${totalFee.toFixed(2)}</span></div>
-        <div class="check-row"><span>Netto erwartet</span><span class="pnl-pos">$${totalNetto.toFixed(2)}</span></div>
+        <div class="check-row"><span>Brutto-PNL (${trades.length} Trades)</span><span class="pnl-pos">${fmt(totalBrutto)}</span></div>
+        <div class="check-row"><span>Gebühr (${(feeRate*100).toFixed(0)}%)</span><span style="color:var(--red)">-${fmt(totalFee)}</span></div>
+        <div class="check-row"><span><strong>Netto erwartet</strong></span><span class="pnl-pos"><strong>${fmt(totalNetto)}</strong></span></div>
       </div>
       <div class="check-box">
-        <h3>Aus dem Wallet</h3>
-        <div class="check-row"><span>Deposits (reinvestiert)</span><span class="pnl-pos">$${totalDep.toFixed(2)}</span></div>
-        <div class="check-row"><span>Withdrawals (ausgezahlt)</span><span style="color:var(--red)">$${totalWith.toFixed(2)}</span></div>
-        <div class="check-row"><span>Wallet gesamt</span><span>$${walletTotal.toFixed(2)}</span></div>
+        <h3>Aus dem Wallet (nur Trade-Transaktionen)</h3>
+        <div class="check-row"><span>Prop Deposits (${deps.length} Tx)</span><span class="pnl-pos">+${fmt(totalDep)}</span></div>
+        <div class="check-row"><span>Prop Withdrawals (${withs.length} Tx)</span><span style="color:var(--red)">+${fmt(totalWith)}</span></div>
+        <div class="check-row capital"><span>Kapitalumschichtungen (${capitalEntries.length} Tx)</span><span>herausgerechnet</span></div>
+        <div class="check-row"><span><strong>Wallet gesamt</strong></span><span><strong>${fmt(walletTotal)}</strong></span></div>
       </div>
     </div>
     <div class="card">
-      <div class="card-header"><h2>Prüfung nach Datum</h2></div>
-      <table><thead><tr><th>Datum</th><th>Trades</th><th>Brutto</th><th>Gebühr</th><th>Netto erwartet</th><th>Wallet</th><th>Status</th></tr></thead>
+      <div class="card-header"><h2>Prüfung nach Datum</h2><span style="font-size:12px;color:var(--text3)">Kapitalumschichtungen werden nicht angezeigt</span></div>
+      <table><thead><tr><th>Datum</th><th>Trades</th><th>Brutto</th><th>Gebühr</th><th>Netto erwartet</th><th>Wallet</th><th>Richtung</th><th>Status</th></tr></thead>
       <tbody>${dateRows}</tbody></table>
     </div>`;
 }
 
 function delItem(type, idx) {
-  const d = load(type); d.splice(idx, 1); save(type, d);
+  const d = load(type); d.splice(idx,1); save(type,d);
   if(type==='trades') renderTrades();
   if(type==='wallet') renderWallet();
 }
